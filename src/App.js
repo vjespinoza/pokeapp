@@ -29,8 +29,10 @@ function App() {
     });
 
     useEffect(() => {
-        sessionStorage.setItem("ACCESS_TOKEN", JSON.stringify(auth.token));
-        sessionStorage.setItem("USER", JSON.stringify(auth.user));
+        if (auth.token !== "" && auth.user !== "") {
+            sessionStorage.setItem("ACCESS_TOKEN", JSON.stringify(auth.token));
+            sessionStorage.setItem("USER", JSON.stringify(auth.user));
+        }
     }, [auth]);
 
     const handleIsActive = () => {
@@ -42,7 +44,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
                 <Router>
-                    <Navbar />
+                    <Navbar auth={auth} setAuth={setAuth} />
                     <Switch>
                         <Route exact path="/">
                             <Home user={auth.user} />

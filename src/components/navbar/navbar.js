@@ -6,9 +6,16 @@ import {
     NavbarListItem,
     NavbarLogo,
 } from "./navbar.elements";
-import Logo from "../../assets/svg/logo.svg";
 
-const Navbar = () => {
+const Navbar = ({ auth, setAuth }) => {
+    const handleEndSession = () => {
+        setAuth({
+            token: "",
+            user: "",
+        });
+        sessionStorage.clear();
+    };
+
     return (
         <NavbarContainer>
             <NavbarList>
@@ -24,11 +31,19 @@ const Navbar = () => {
 
             <NavbarList>
                 <NavbarListItem>
-                    <Link to="/login">
-                        <Button noMargin smFont>
-                            Iniciar Sesión
-                        </Button>
-                    </Link>
+                    {!auth.token ? (
+                        <Link to="/login">
+                            <Button noMargin smFont>
+                                Iniciar Sesión
+                            </Button>
+                        </Link>
+                    ) : (
+                        <Link to="/">
+                            <Button noMargin smFont onClick={handleEndSession}>
+                                Cerrar Sesión
+                            </Button>
+                        </Link>
+                    )}
                 </NavbarListItem>
             </NavbarList>
         </NavbarContainer>
