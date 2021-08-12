@@ -14,7 +14,10 @@ const Navbar = () => {
             <NavbarList>
                 <NavbarListItem>
                     <Link to="/">
-                        <NavbarLogo src={Logo} alt="runrs logo" />
+                        <NavbarLogo
+                            src="../img/poke-logo.png"
+                            alt="pokeapp logo"
+                        />
                     </Link>
                 </NavbarListItem>
             </NavbarList>
