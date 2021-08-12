@@ -1,25 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+//Components
+import Navbar from "./components/navbar/navbar";
+//Pages
+import { Home, Login, Store } from "./pages";
+//Styles
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles/theme";
+import { GlobalStyles } from "./styles/globalStyles";
+//React Router
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+} from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [isActive, setIsActive] = useState(false);
+    const [isValidated, setIsValidated] = useState({
+        loginForm: false,
+        signupForm: false,
+    });
+    const [auth, setAuth] = useState({
+        token: sessionStorage.ACCESS_TOKEN
+            ? JSON.parse(sessionStorage.ACCESS_TOKEN)
+            : "",
+        user: sessionStorage.USER ? JSON.parse(sessionStorage.USER) : "",
+    });
+
+    useEffect(() => {
+        sessionStorage.setItem("ACCESS_TOKEN", JSON.stringify(auth.token));
+        sessionStorage.setItem("USER", JSON.stringify(auth.user));
+    }, [auth]);
+
+    const handleIsActive = () => {
+        setIsActive((isActive) => !isActive);
+    };
+
+    return (
+        <>
+            <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <Router>
+                    <Navbar />
+                    <Switch>
+                        <Route exact path="/">
+                            <Home user={auth.user} />
+                        </Route>
+                        <Route path="/login">
+                            {auth.token ? (
+                                <Redirect to="/store" />
+                            ) : (
+                                <Login
+                                    isActive={isActive}
+                                    handleIsActive={handleIsActive}
+                                    isValidated={isValidated}
+                                    setIsValidated={setIsValidated}
+                                    auth={auth}
+                                    setAuth={setAuth}
+                                />
+                            )}
+                        </Route>
+                        <Route path="/store">
+                            {!auth.token ? <Redirect to="/login" /> : <Store />}
+                        </Route>
+                    </Switch>
+                </Router>
+            </ThemeProvider>
+        </>
+    );
 }
 
 export default App;

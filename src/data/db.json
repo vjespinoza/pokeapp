@@ -1,0 +1,37 @@
+[
+    {
+        "id": "poke-1",
+        "name": "Charmeleon",
+        "category": "Flame",
+        "abilities": "Blaze",
+        "weaknesses": ["Water", "Ground", "Rock"]
+    },
+    {
+        "id": "poke-2",
+        "name": "Bulbasaur",
+        "category": "Seed",
+        "abilities": "Overgrow",
+        "weaknesses": ["Fire", "Psychic", "Flying", "Ice"]
+    },
+    {
+        "id": "poke-3",
+        "name": "Wartortle",
+        "category": "Turtle",
+        "abilities": "Torrent",
+        "weaknesses": ["Grass", "Electric"]
+    },
+    {
+        "id": "poke-4",
+        "name": "Charizard",
+        "category": "Flame",
+        "abilities": "Blaze",
+        "weaknesses": ["Water", "Electric", "Rock"]
+    },
+    {
+        "id": "poke-5",
+        "name": "Caterpie",
+        "category": "Worm",
+        "abilities": "Shield Dust",
+        "weaknesses": ["Fire", "Flying", "Rock"]
+    }
+]
