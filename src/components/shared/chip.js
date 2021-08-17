@@ -44,7 +44,6 @@ const Chip = ({ type, colors }) => {
         top: { background: colors[0] },
         bottom: { background: colors[1] },
     };
-    console.log(style);
 
     return (
         <Container>

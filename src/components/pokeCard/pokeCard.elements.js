@@ -34,8 +34,6 @@ export const ImageWrapper = styled.section`
     height: 125px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    /* clip-path: polygon(0 0, 100% 0, 100% 65%, 0% 100%); */
-    /* background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%); */
 
     & div.overflow {
         display: block;

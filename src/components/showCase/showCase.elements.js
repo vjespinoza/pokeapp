@@ -4,7 +4,8 @@ export const ShowCaseContainer = styled.main`
     display: block;
     width: 90%;
     margin: 65px auto;
-    font-family: "Flexo Medium", arial, sans-serif;
+    font-family: "Cairo", sans-serif;
+    line-height: 1.2;
 `;
 
 export const PokedexGrid = styled.main`
