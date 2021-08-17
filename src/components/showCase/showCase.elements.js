@@ -4,7 +4,6 @@ export const ShowCaseContainer = styled.main`
     display: block;
     width: 90%;
     margin: 65px auto;
-    font-family: "Cairo", sans-serif;
     line-height: 1.2;
 `;
 

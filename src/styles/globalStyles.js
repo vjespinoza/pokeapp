@@ -10,7 +10,8 @@ export const GlobalStyles = createGlobalStyle`
 
 body {
     color: ${(props) => props.theme.colors.font};
-    font-family: 'Roboto', sans-serif;
+    font-family: "Cairo", sans-serif;
+
 }
 
 h1, h2, h3, h4 {
