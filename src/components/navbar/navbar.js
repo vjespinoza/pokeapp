@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../shared/button";
-import {
-    NavbarContainer,
-    NavbarList,
-    NavbarListItem,
-    NavbarLogo,
-} from "./navbar.elements";
+import { NavbarContainer, NavbarList, NavbarListItem, NavbarLogo } from "./navbar.elements";
 
 const Navbar = ({ auth, setAuth }) => {
     const handleEndSession = () => {
@@ -21,10 +16,7 @@ const Navbar = ({ auth, setAuth }) => {
             <NavbarList>
                 <NavbarListItem>
                     <Link to="/">
-                        <NavbarLogo
-                            src="../img/poke-logo.png"
-                            alt="pokeapp logo"
-                        />
+                        <NavbarLogo src="../img/poke-logo.png" alt="pokeapp logo" />
                     </Link>
                 </NavbarListItem>
             </NavbarList>
