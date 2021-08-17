@@ -6,7 +6,8 @@ const Container = styled.div`
     border-radius: 3px;
     position: relative;
     width: 100%;
-    padding: 5px 8px 3px 8px;
+    padding: 5px 8px 5px 8px;
+    /* background: grey; */
 
     & .chip-label {
         display: block;
@@ -21,7 +22,7 @@ const Container = styled.div`
         bottom: 50%;
         left: 0;
         width: 100%;
-        height: 10px;
+        height: 12px;
         border-top-right-radius: 3px;
         border-top-left-radius: 3px;
         z-index: -1;
@@ -32,7 +33,7 @@ const Container = styled.div`
         top: 50%;
         left: 0;
         width: 100%;
-        height: 10px;
+        height: 12px;
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px;
         z-index: -1;
