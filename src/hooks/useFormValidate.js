@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 //Import utility funtions
 import { validate } from "../utils/validate";
+import { errorMessage } from "../utils/createModal";
 
 const useFormValidate = ({ isValidated, setIsValidated }) => {
     const [data, setData] = useState({
@@ -40,19 +41,35 @@ const useFormValidate = ({ isValidated, setIsValidated }) => {
             let errors = Object.entries(error).length !== 0;
 
             if (!errors && form === "login") {
-                console.log("Success - log");
                 setIsValidated({
                     ...isValidated,
                     loginForm: true,
                 });
+                setData({
+                    form: "",
+                    name: "",
+                    email: "",
+                    password: "",
+                    password2: "",
+                });
+            } else if (errors && form === "login") {
+                errorMessage(error);
             }
 
             if (!errors && form === "signup") {
-                console.log("Success - reg");
                 setIsValidated({
                     ...isValidated,
                     signupForm: true,
                 });
+                setData({
+                    form: "",
+                    name: "",
+                    email: "",
+                    password: "",
+                    password2: "",
+                });
+            } else if (errors && form === "signup") {
+                errorMessage(error);
             }
         }
     }, [error]);
