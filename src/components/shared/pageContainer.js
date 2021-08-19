@@ -5,7 +5,7 @@ export const PageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     margin: 65px 0 0 0;
     height: ${(props) => (props.singlePage ? "calc(100vh - 65px)" : "auto")};
 `;
