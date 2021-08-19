@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 //Import utility funtions
 import { validate } from "../utils/validate";
-import { errorMessage, successMessage } from "../utils/createModal";
-import { fetchLogin } from "../utils/fetchLogin";
 
-const useFormValidate = ({ isValidated, setIsValidated, auth, setAuth }) => {
+const useFormValidate = ({ isValidated, setIsValidated }) => {
     const [data, setData] = useState({
         form: "",
         name: "",
@@ -13,7 +11,7 @@ const useFormValidate = ({ isValidated, setIsValidated, auth, setAuth }) => {
         password2: "",
     });
 
-    const [error, setError] = useState({});
+    const [error, setError] = useState();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +23,7 @@ const useFormValidate = ({ isValidated, setIsValidated, auth, setAuth }) => {
 
     const handleSubmnit = (e) => {
         e.preventDefault();
-        setError(validate(data, isValidated, setIsValidated));
+        setError(validate(data));
     };
 
     const handleClick = (e) => {
@@ -37,11 +35,25 @@ const useFormValidate = ({ isValidated, setIsValidated, auth, setAuth }) => {
     };
 
     useEffect(() => {
-        if (Object.values(error).length > 0) {
-            errorMessage(error);
-        } else if (Object.values(error).length === 0) {
-            fetchLogin(data, isValidated, setAuth);
-            successMessage(data, isValidated);
+        if (error) {
+            let form = data.form;
+            let errors = Object.entries(error).length !== 0;
+
+            if (!errors && form === "login") {
+                console.log("Success - log");
+                setIsValidated({
+                    ...isValidated,
+                    loginForm: true,
+                });
+            }
+
+            if (!errors && form === "signup") {
+                console.log("Success - reg");
+                setIsValidated({
+                    ...isValidated,
+                    signupForm: true,
+                });
+            }
         }
     }, [error]);
 

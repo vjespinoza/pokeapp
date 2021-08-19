@@ -1,5 +1,5 @@
-export const validate = (data, isValidated, setIsValidated) => {
-    const errors = {};
+export const validate = (data) => {
+    let errors = {};
 
     const nameVal = /^[\u00C0-\u00FFa-z ,.'-]+$/gi;
     const emailVal = /\S+@\S+\.[a-z]+/g;
@@ -35,12 +35,6 @@ export const validate = (data, isValidated, setIsValidated) => {
     } else if (data.password !== data.password2 && data.form === "signup") {
         //Checks if password2 has 6 chars minimum
         errors.password2 = "Las contraseñas no coinciden";
-    }
-
-    if (Object.entries(errors).length === 0 && data.form === "signup") {
-        setIsValidated({ ...isValidated, signupForm: true });
-    } else if (Object.entries(errors).length === 0 && data.form === "login") {
-        setIsValidated({ ...isValidated, loginForm: true });
     }
 
     return errors;

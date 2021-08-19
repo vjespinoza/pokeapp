@@ -17,11 +17,19 @@ export const errorMessage = (errors) => {
     }
 };
 
-export const successMessage = (data, isValidated) => {
+export const successMessage = (isValidated) => {
     if (isValidated.signupForm) {
         swal({
             title: "Felicidades!",
             text: "Registro creado exitosamente",
+            icon: "success",
+        });
+    }
+
+    if (isValidated.loginForm) {
+        swal({
+            title: "Bienvenido!",
+            text: "Has ingresado a tu cuenta",
             icon: "success",
         });
     }
