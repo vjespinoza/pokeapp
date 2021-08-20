@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 //Import components
 import { FormTitle } from "../formTitle";
 import { FormFooter } from "../formFooter";
@@ -9,11 +8,9 @@ import { InputLabel } from "../../../shared/inputLabel";
 import { InputIcon } from "../../../shared/inputIcon";
 import { InputGroup } from "../../../shared/inputGroup";
 //Import custom hook and util functions
+import useLogin from "../../../../hooks/useLogin";
 import useFormValidate from "../../../../hooks/useFormValidate";
 import useFetchApi from "../../../../hooks/useFetchApi";
-import { successMessage } from "../../../../utils/createModal";
-// Import sweet alert
-import swal from "sweetalert";
 
 export const FormLogin = ({
     isActive,
@@ -35,29 +32,16 @@ export const FormLogin = ({
         url: "https://reqres.in/api/login",
     });
 
-    useEffect(() => {
-        isValidated.loginForm &&
-            postRequest({ email: data.email, password: data.password });
-    }, [isValidated]);
-
-    useEffect(() => {
-        if (fetchData) {
-            setAuth({
-                ...auth,
-                user: data.email,
-                token: fetchData.token,
-            });
-            successMessage(isValidated);
-        }
-
-        setData({
-            form: "",
-            name: "",
-            email: "",
-            password: "",
-            password2: "",
-        });
-    }, [fetchData]);
+    useLogin({
+        data,
+        setData,
+        isValidated,
+        fetchData,
+        fetchError,
+        postRequest,
+        auth,
+        setAuth,
+    });
 
     return (
         <Form isActive={isActive} gradient onSubmit={(e) => handleSubmnit(e)}>

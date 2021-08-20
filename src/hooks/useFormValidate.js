@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 //Import utility funtions
 import { validate } from "../utils/validate";
-import { errorMessage } from "../utils/createModal";
+import { successMessage, errorMessage } from "../utils/createModal";
 
 const useFormValidate = ({ isValidated, setIsValidated }) => {
     const [data, setData] = useState({
@@ -54,18 +54,26 @@ const useFormValidate = ({ isValidated, setIsValidated }) => {
                     ...isValidated,
                     signupForm: true,
                 });
-                setData({
-                    form: "",
-                    name: "",
-                    email: "",
-                    password: "",
-                    password2: "",
-                });
             } else if (errors && form === "signup") {
                 errorMessage(error);
             }
         }
     }, [error]);
+
+    // This may need refactoring if real regsitration is implemented
+    useEffect(() => {
+        let form = data.form;
+        if (form === "signup") {
+            successMessage(isValidated);
+            setData({
+                form: "",
+                name: "",
+                email: "",
+                password: "",
+                password2: "",
+            });
+        }
+    }, [isValidated]);
 
     return { data, setData, error, handleChange, handleSubmnit, handleClick };
 };

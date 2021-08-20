@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 //Components
 import Navbar from "./components/navbar/navbar";
 //Pages
-import { Home, Login, Store } from "./pages";
+import { Home, Login, Pokedex } from "./pages";
 //Styles
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
@@ -51,7 +51,7 @@ function App() {
                         </Route>
                         <Route path="/login">
                             {auth.token ? (
-                                <Redirect to="/store" />
+                                <Redirect to="/pokedex" />
                             ) : (
                                 <Login
                                     isActive={isActive}
@@ -63,8 +63,12 @@ function App() {
                                 />
                             )}
                         </Route>
-                        <Route path="/store">
-                            {!auth.token ? <Redirect to="/login" /> : <Store />}
+                        <Route path="/pokedex">
+                            {!auth.token ? (
+                                <Redirect to="/login" />
+                            ) : (
+                                <Pokedex />
+                            )}
                         </Route>
                     </Switch>
                 </Router>

@@ -28,6 +28,7 @@ export const FormSignup = ({
             <FormTitle>Registrarse</FormTitle>
             <InputGroup>
                 <Input
+                    noBG
                     value={data.name}
                     name="name"
                     onChange={(e) => handleChange(e)}
@@ -39,6 +40,7 @@ export const FormSignup = ({
             </InputGroup>
             <InputGroup>
                 <Input
+                    noBG
                     value={data.email}
                     name="email"
                     onChange={(e) => handleChange(e)}
@@ -50,6 +52,7 @@ export const FormSignup = ({
             </InputGroup>
             <InputGroup>
                 <Input
+                    noBG
                     value={data.password}
                     name="password"
                     onChange={(e) => handleChange(e)}
@@ -78,6 +81,7 @@ export const FormSignup = ({
             </InputGroup>
             <InputGroup>
                 <Input
+                    noBG
                     value={data.password2}
                     name="password2"
                     onChange={(e) => handleChange(e)}

@@ -23,7 +23,7 @@ a {
   text-decoration: none;
 }
 
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
@@ -33,7 +33,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #fff;
-}
+  -webkit-text-fill-color: ${(props) =>
+      props.noBG ? props.theme.colors.font : "#fff"};
+} */
 
 `;

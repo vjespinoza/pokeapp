@@ -34,4 +34,12 @@ export const Input = styled.input`
         transition: transform ease-in-out 200ms;
         transform-origin: left;
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: ${(props) =>
+            props.noBG ? props.theme.colors.font : "#fff"};
+    }
 `;

@@ -1,7 +1,7 @@
 import { PageContainer } from "../../components/shared/pageContainer";
-import ShowCase from "./../../components/showCase/showCase";
+import ShowCase from "../../components/showCase/showCase";
 
-const Store = () => {
+const Pokedex = () => {
     return (
         <PageContainer>
             <ShowCase />
@@ -9,4 +9,4 @@ const Store = () => {
     );
 };
 
-export default Store;
+export default Pokedex;
