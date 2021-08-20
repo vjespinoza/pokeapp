@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 //Import components
 import { Form } from "../../../shared/form";
 import { Input } from "../../../shared/input";
@@ -7,8 +8,10 @@ import { FormFooter } from "../formFooter";
 import { InputLabel } from "../../../shared/inputLabel";
 import { InputIcon } from "../../../shared/inputIcon";
 import { InputGroup } from "../../../shared/inputGroup";
-//Import custom hook
+//Import custom hook and util functions
 import useFormValidate from "../../../../hooks/useFormValidate";
+import useFetchApi from "../../../../hooks/useFetchApi";
+import { successMessage } from "../../../../utils/createModal";
 
 export const FormLogin = ({
     isActive,
@@ -20,12 +23,37 @@ export const FormLogin = ({
     auth,
     setAuth,
 }) => {
-    const { data, handleChange, handleSubmnit, handleClick } = useFormValidate({
-        isValidated,
-        setIsValidated,
-        auth,
-        setAuth,
+    const { data, setData, handleChange, handleSubmnit, handleClick } =
+        useFormValidate({
+            isValidated,
+            setIsValidated,
+        });
+
+    const { fetchData, postRequest } = useFetchApi({
+        url: "https://reqres.in/api/login",
     });
+
+    useEffect(() => {
+        isValidated.loginForm &&
+            postRequest({ email: data.email, password: data.password });
+    }, [isValidated]);
+
+    useEffect(() => {
+        fetchData &&
+            setAuth({
+                ...auth,
+                user: data.email,
+                token: fetchData.token,
+            });
+        successMessage(isValidated);
+        setData({
+            form: "",
+            name: "",
+            email: "",
+            password: "",
+            password2: "",
+        });
+    }, [fetchData]);
 
     return (
         <Form isActive={isActive} gradient onSubmit={(e) => handleSubmnit(e)}>
@@ -71,7 +99,9 @@ export const FormLogin = ({
             </InputGroup>
             <Button
                 data-btn="login"
-                onClick={(e) => handleClick(e)}
+                onClick={(e) => {
+                    handleClick(e);
+                }}
                 type="submit"
             >
                 Iniciar Sesión

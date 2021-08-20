@@ -45,13 +45,6 @@ const useFormValidate = ({ isValidated, setIsValidated }) => {
                     ...isValidated,
                     loginForm: true,
                 });
-                setData({
-                    form: "",
-                    name: "",
-                    email: "",
-                    password: "",
-                    password2: "",
-                });
             } else if (errors && form === "login") {
                 errorMessage(error);
             }
@@ -74,7 +67,7 @@ const useFormValidate = ({ isValidated, setIsValidated }) => {
         }
     }, [error]);
 
-    return { data, error, handleChange, handleSubmnit, handleClick };
+    return { data, setData, error, handleChange, handleSubmnit, handleClick };
 };
 
 export default useFormValidate;

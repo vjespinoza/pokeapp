@@ -1,8 +1,8 @@
+import { FormTitle } from "../formTitle";
+import { FormFooter } from "../formFooter";
 import { Form } from "../../../shared/form";
 import { Input } from "../../../shared/input";
 import { Button } from "../../../shared/button";
-import { FormTitle } from "../formTitle";
-import { FormFooter } from "../formFooter";
 import { InputLabel } from "../../../shared/inputLabel";
 import { InputIcon } from "../../../shared/inputIcon";
 import { InputGroup } from "../../../shared/inputGroup";

@@ -29,6 +29,7 @@ function App() {
     });
 
     useEffect(() => {
+        console.log(auth);
         if (auth.token !== "" && auth.user !== "") {
             sessionStorage.setItem("ACCESS_TOKEN", JSON.stringify(auth.token));
             sessionStorage.setItem("USER", JSON.stringify(auth.user));
