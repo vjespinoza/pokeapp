@@ -87,6 +87,7 @@ export const InfoWrapper = styled.section`
     }
 
     & h2.poke-name {
+        text-transform: capitalize;
         font-size: 1.6rem;
         margin-bottom: 10px;
     }

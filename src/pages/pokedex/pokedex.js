@@ -1,10 +1,10 @@
 import { PageContainer } from "../../components/shared/pageContainer";
 import ShowCase from "../../components/showCase/showCase";
 
-const Pokedex = ({ auth }) => {
+const Pokedex = () => {
     return (
         <PageContainer>
-            <ShowCase auth={auth} />
+            <ShowCase />
         </PageContainer>
     );
 };

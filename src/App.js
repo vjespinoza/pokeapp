@@ -67,7 +67,7 @@ function App() {
                             {!auth.token ? (
                                 <Redirect to="/login" />
                             ) : (
-                                <Pokedex auth={auth} />
+                                <Pokedex />
                             )}
                         </Route>
                     </Switch>

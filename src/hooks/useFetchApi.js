@@ -26,7 +26,6 @@ const useFetchApi = ({ url }) => {
             let request = await api.get(`/${query}`);
             let response = request.data;
             setFecthData(response);
-            // console.log(response);
             return response;
         } catch (err) {
             setFecthError(err);
