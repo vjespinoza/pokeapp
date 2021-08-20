@@ -3,6 +3,7 @@ import axios from "axios";
 
 const useFetchApi = ({ url }) => {
     const [fetchData, setFecthData] = useState(null);
+    const [fetchError, setFecthError] = useState(null);
 
     const api = axios.create({
         baseURL: url,
@@ -14,6 +15,7 @@ const useFetchApi = ({ url }) => {
             let response = request.data;
             setFecthData(response);
         } catch (err) {
+            setFecthError(err);
             return err;
         }
     };
@@ -24,11 +26,12 @@ const useFetchApi = ({ url }) => {
             let response = request.data;
             setFecthData(response);
         } catch (err) {
+            setFecthError(err);
             return err;
         }
     };
 
-    return { fetchData, postRequest, getRequest };
+    return { fetchData, fetchError, postRequest, getRequest };
 };
 
 export default useFetchApi;

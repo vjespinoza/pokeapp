@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 //Import components
+import { FormTitle } from "../formTitle";
+import { FormFooter } from "../formFooter";
 import { Form } from "../../../shared/form";
 import { Input } from "../../../shared/input";
 import { Button } from "../../../shared/button";
-import { FormTitle } from "../formTitle";
-import { FormFooter } from "../formFooter";
 import { InputLabel } from "../../../shared/inputLabel";
 import { InputIcon } from "../../../shared/inputIcon";
 import { InputGroup } from "../../../shared/inputGroup";
@@ -12,6 +12,8 @@ import { InputGroup } from "../../../shared/inputGroup";
 import useFormValidate from "../../../../hooks/useFormValidate";
 import useFetchApi from "../../../../hooks/useFetchApi";
 import { successMessage } from "../../../../utils/createModal";
+// Import sweet alert
+import swal from "sweetalert";
 
 export const FormLogin = ({
     isActive,
@@ -29,7 +31,7 @@ export const FormLogin = ({
             setIsValidated,
         });
 
-    const { fetchData, postRequest } = useFetchApi({
+    const { fetchData, fetchError, postRequest } = useFetchApi({
         url: "https://reqres.in/api/login",
     });
 
@@ -39,13 +41,15 @@ export const FormLogin = ({
     }, [isValidated]);
 
     useEffect(() => {
-        fetchData &&
+        if (fetchData) {
             setAuth({
                 ...auth,
                 user: data.email,
                 token: fetchData.token,
             });
-        successMessage(isValidated);
+            successMessage(isValidated);
+        }
+
         setData({
             form: "",
             name: "",
