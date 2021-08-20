@@ -11,7 +11,7 @@ import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
 
-const PokeCard = ({ card }) => {
+const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
 
     const handleFlipcard = () => {
@@ -20,7 +20,7 @@ const PokeCard = ({ card }) => {
 
     return (
         <PokeCardContainer
-            id={card.id}
+            id={`${poke.name}-${poke.id}`}
             flipCard={flipCard}
             onClick={handleFlipcard}
         >
@@ -34,13 +34,13 @@ const PokeCard = ({ card }) => {
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <SvgGradient
-                                        colors={colorizer(card.type[0])}
-                                        id={parseInt(card.id.slice(-2))}
+                                        colors={colorizer(
+                                            poke.types[0].type.name
+                                        )}
+                                        id={parseInt(poke.id)}
                                     />
                                     <path
-                                        fill={`url(#grad${parseInt(
-                                            card.id.slice(-2)
-                                        )})`}
+                                        fill={`url(#grad${poke.id})`}
                                         d="M26.5,-13.5C32.4,9.4,33.7,28.9,25,35.5C16.2,42.1,-2.7,36,-20,24.2C-37.2,12.4,-52.8,-4.9,-49.2,-24.7C-45.6,-44.5,-22.8,-66.8,-6.2,-64.8C10.3,-62.8,20.7,-36.4,26.5,-13.5Z"
                                         transform="translate(100 100)"
                                     />
@@ -48,23 +48,28 @@ const PokeCard = ({ card }) => {
                             </div>
                             <div className="image">
                                 <img
-                                    src={`./img/${card.id}.png`}
-                                    alt={card.name}
+                                    src={
+                                        poke.sprites.other["official-artwork"]
+                                            .front_default
+                                    }
+                                    alt={poke.name}
                                 ></img>
                             </div>
                         </div>
                     </ImageWrapper>
                     <InfoWrapper>
-                        <p className="poke-number">{card.number}</p>
-                        <h2 className="poke-name">{card.name}</h2>
+                        <p className="poke-number">{`#${poke.id
+                            .toString()
+                            .padStart(3, "0")}`}</p>
+                        <h2 className="poke-name">{poke.name}</h2>
                         <h4>Type:</h4>
                         <ul className="poke-info-type">
-                            {card.type.map((type) => {
+                            {poke.types.map((type, i) => {
                                 return (
-                                    <li key={type}>
+                                    <li key={i}>
                                         <Chip
-                                            type={type}
-                                            colors={colorizer(type)}
+                                            type={type.type.name}
+                                            colors={colorizer(type.type.name)}
                                         />
                                     </li>
                                 );
@@ -73,7 +78,7 @@ const PokeCard = ({ card }) => {
                     </InfoWrapper>
                 </CardFront>
                 <CardBack>
-                    <img src={`./img/poke-logo.png`} alt={card.name}></img>
+                    <img src={`./img/poke-logo.png`} alt={poke.name}></img>
                 </CardBack>
             </InnerWrapper>
         </PokeCardContainer>
