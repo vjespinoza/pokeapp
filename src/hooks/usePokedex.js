@@ -9,8 +9,15 @@ const usePokedex = ({ getRequest, fetchData }) => {
         }
     };
 
+    const getAllPokes = (count) => {
+        for (let i = 0; i < count; i++) {
+            getRequest(i + 1);
+        }
+    };
+
     useEffect(() => {
-        getRandomPokes(12);
+        getAllPokes(40);
+        // getRandomPokes(12);
     }, []);
 
     useEffect(() => {

@@ -15,26 +15,13 @@ const ShowCase = () => {
         <ShowCaseContainer>
             <h1>Pokédex</h1>
             <PokedexGrid>
-                {pokeData.map((poke, i) => {
-                    return (
-                        <PokeCard key={`${poke.name}-${i}`} poke={poke}>
-                            <p>{poke.name}</p>
-                            <p>{`#${poke.id.toString().padStart(3, "0")}`}</p>
-                            <ul>
-                                {poke.types.map((type, i) => {
-                                    return <li key={i}>{type.type.name}</li>;
-                                })}
-                            </ul>
-                            <img
-                                src={
-                                    poke.sprites.other["official-artwork"]
-                                        .front_default
-                                }
-                                alt={poke.name}
-                            />
-                        </PokeCard>
-                    );
-                })}
+                {pokeData
+                    .sort((a, b) => a.id - b.id)
+                    .map((poke, i) => {
+                        return (
+                            <PokeCard key={`${poke.name}-${i}`} poke={poke} />
+                        );
+                    })}
             </PokedexGrid>
         </ShowCaseContainer>
     );
