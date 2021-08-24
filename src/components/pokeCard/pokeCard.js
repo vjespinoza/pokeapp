@@ -23,6 +23,7 @@ const PokeCard = ({ poke }) => {
             id={`${poke.name}-${poke.id}`}
             flipCard={flipCard}
             onClick={handleFlipcard}
+            data-pokecard
         >
             <InnerWrapper flipCard={flipCard}>
                 <CardFront>

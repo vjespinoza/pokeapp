@@ -2,9 +2,12 @@ import PokeCard from "./../pokeCard/pokeCard";
 import { ShowCaseContainer, PokedexGrid } from "./showCase.elements";
 //Custom hook
 import usePokedex from "../../hooks/usePokedex";
+import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
     const { pokeDetails, gotoNextPage, gotoPrevPage, loading } = usePokedex();
+
+    useObserver(pokeDetails);
 
     return (
         <ShowCaseContainer>
@@ -13,8 +16,8 @@ const ShowCase = () => {
             ) : (
                 <>
                     <h1>Pokédex</h1>
-                    <button onClick={gotoPrevPage}>Prev</button>
-                    <button onClick={gotoNextPage}>Next</button>
+                    {/* <button onClick={gotoPrevPage}>Prev</button>
+                    <button onClick={gotoNextPage}>Next</button> */}
                     <PokedexGrid>
                         {pokeDetails
                             .sort((a, b) => a.id - b.id)
