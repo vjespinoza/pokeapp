@@ -22,11 +22,15 @@ function App() {
         signupForm: false,
     });
     const [auth, setAuth] = useState({
-        token: sessionStorage.ACCESS_TOKEN
-            ? JSON.parse(sessionStorage.ACCESS_TOKEN)
-            : "",
-        user: sessionStorage.USER ? JSON.parse(sessionStorage.USER) : "",
+        token: "QpwL5tke4Pnpja7X4",
+        user: "eve.holt@reqres.in",
     });
+    // const [auth, setAuth] = useState({
+    //     token: sessionStorage.ACCESS_TOKEN
+    //         ? JSON.parse(sessionStorage.ACCESS_TOKEN)
+    //         : "",
+    //     user: sessionStorage.USER ? JSON.parse(sessionStorage.USER) : "",
+    // });
 
     useEffect(() => {
         if (auth.token !== "" && auth.user !== "") {
