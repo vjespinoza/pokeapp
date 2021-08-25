@@ -1,26 +1,32 @@
 import { useState, useEffect } from "react";
 
-const useObserver = (pokeDetails) => {
-    const [pokecards, setPokecards] = useState([]);
+const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
+    const [cardsContainer, setCardsContainer] = useState();
 
     useEffect(() => {
-        let x = pokeDetails && document.querySelectorAll("[data-pokecard]");
-        setPokecards(Array.from(x));
+        setCardsContainer(document.getElementById("pokegrid"));
     }, [pokeDetails]);
 
-    let options = {};
+    const setObserver = () => {
+        const options = {
+            threshold: 0,
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    console.log(entry.target.id, entry.isIntersecting);
+                    hasMore && gotoNextPage();
+                }
+            });
+        }, options);
+        cardsContainer && observer.observe(cardsContainer.lastElementChild);
+    };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            console.log(entry);
-        });
-    }, options);
+    useEffect(() => {
+        setObserver();
+    }, [pokeDetails]);
 
-    console.log(observer);
-
-    pokecards.forEach((card) => {
-        observer.observe(card);
-    });
+    return { setObserver };
 };
 
 export default useObserver;

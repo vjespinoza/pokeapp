@@ -9,8 +9,8 @@ const usePokedex = () => {
         "https://pokeapi.co/api/v2/pokemon"
     );
     const [nextPageUrl, setNextPageUrl] = useState();
-    const [prevPageUrl, setPrevPageUrl] = useState();
     const [loading, setLoading] = useState(true);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         setLoading(true);
@@ -22,8 +22,13 @@ const usePokedex = () => {
             .then((res) => {
                 setLoading(false);
                 setNextPageUrl(res.data.next);
-                setPrevPageUrl(res.data.previous);
                 setPokemon(res.data.results);
+                if (!res.data.next) {
+                    setHasMore(false);
+                }
+            })
+            .catch((e) => {
+                if (axios.isCancel(e)) return;
             });
 
         return () => cancel();
@@ -46,15 +51,11 @@ const usePokedex = () => {
         setCurrentPageUrl(nextPageUrl);
     }
 
-    function gotoPrevPage() {
-        setCurrentPageUrl(prevPageUrl);
-    }
-
     return {
         pokeDetails,
         gotoNextPage,
-        gotoPrevPage,
         loading,
+        hasMore,
     };
 };
 

@@ -5,33 +5,23 @@ import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
-    const { pokeDetails, gotoNextPage, gotoPrevPage, loading } = usePokedex();
+    const { pokeDetails, gotoNextPage, loading, hasMore } = usePokedex();
 
-    useObserver(pokeDetails);
+    useObserver({ pokeDetails, gotoNextPage, hasMore });
 
     return (
         <ShowCaseContainer>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <>
-                    <h1>Pokédex</h1>
-                    {/* <button onClick={gotoPrevPage}>Prev</button>
-                    <button onClick={gotoNextPage}>Next</button> */}
-                    <PokedexGrid>
-                        {pokeDetails
-                            .sort((a, b) => a.id - b.id)
-                            .map((poke, i) => {
-                                return (
-                                    <PokeCard
-                                        key={`${poke.name}-${i}`}
-                                        poke={poke}
-                                    />
-                                );
-                            })}
-                    </PokedexGrid>
-                </>
-            )}
+            <h1>Pokédex</h1>
+            <PokedexGrid id="pokegrid">
+                {pokeDetails
+                    .sort((a, b) => a.id - b.id)
+                    .map((poke, i) => {
+                        return (
+                            <PokeCard key={`${poke.name}-${i}`} poke={poke} />
+                        );
+                    })}
+                {loading && <p>Loading...</p>}
+            </PokedexGrid>
         </ShowCaseContainer>
     );
 };

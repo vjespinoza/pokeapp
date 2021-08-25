@@ -7,7 +7,7 @@ export const ShowCaseContainer = styled.main`
     line-height: 1.2;
 `;
 
-export const PokedexGrid = styled.main`
+export const PokedexGrid = styled.section`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     gap: 20px;
