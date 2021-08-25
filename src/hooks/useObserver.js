@@ -9,21 +9,22 @@ const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
 
     const setObserver = () => {
         const options = {
-            threshold: 0.75,
+            threshold: 1,
         };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.setAttribute("style", "background: red");
                     hasMore && gotoNextPage();
                 }
             });
         }, options);
-        cardsContainer && observer.observe(cardsContainer.lastElementChild);
+        if (cardsContainer && pokeDetails.length % 20 === 0) {
+            observer.observe(cardsContainer.lastElementChild);
+        }
     };
 
     useEffect(() => {
-        pokeDetails.length >= 20 && setObserver();
+        setObserver();
     }, [pokeDetails]);
 
     return { setObserver };
