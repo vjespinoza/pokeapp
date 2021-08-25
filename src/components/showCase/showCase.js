@@ -1,5 +1,9 @@
 import PokeCard from "./../pokeCard/pokeCard";
-import { ShowCaseContainer, PokedexGrid } from "./showCase.elements";
+import {
+    ShowCaseContainer,
+    PokedexGrid,
+    CardLoader,
+} from "./showCase.elements";
 //Custom hook
 import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
@@ -20,7 +24,7 @@ const ShowCase = () => {
                             <PokeCard key={`${poke.name}-${i}`} poke={poke} />
                         );
                     })}
-                {loading && <p>Loading...</p>}
+                {loading && <CardLoader />}
             </PokedexGrid>
         </ShowCaseContainer>
     );

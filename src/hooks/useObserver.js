@@ -9,12 +9,12 @@ const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
 
     const setObserver = () => {
         const options = {
-            threshold: 0,
+            threshold: 0.75,
         };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    console.log(entry.target.id, entry.isIntersecting);
+                    entry.target.setAttribute("style", "background: red");
                     hasMore && gotoNextPage();
                 }
             });
@@ -23,7 +23,7 @@ const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
     };
 
     useEffect(() => {
-        setObserver();
+        pokeDetails.length >= 20 && setObserver();
     }, [pokeDetails]);
 
     return { setObserver };
