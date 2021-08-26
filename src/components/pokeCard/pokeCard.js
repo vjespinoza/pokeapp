@@ -16,7 +16,7 @@ import {
 import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
-import { X } from "@styled-icons/bootstrap";
+import { X, GenderMale, GenderFemale } from "@styled-icons/bootstrap";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
@@ -25,8 +25,10 @@ const PokeCard = ({ poke }) => {
         setFlipCard((flipCard) => !flipCard);
     };
 
+    // console.log(poke);
+
     return (
-        <PokeCardContainer id={`${poke.name}-${poke.id}`}>
+        <PokeCardContainer id={poke.details.name}>
             <InnerWrapper flipCard={flipCard}>
                 <CardFront flipCard={flipCard} onClick={handleFlipcard}>
                     <ImageWrapper>
@@ -38,12 +40,12 @@ const PokeCard = ({ poke }) => {
                                 >
                                     <SvgGradient
                                         colors={colorizer(
-                                            poke.types[0].type.name
+                                            poke.details.types[0].type.name
                                         )}
-                                        id={parseInt(poke.id)}
+                                        id={parseInt(poke.details.id)}
                                     />
                                     <path
-                                        fill={`url(#grad${poke.id})`}
+                                        fill={`url(#grad${poke.details.id})`}
                                         d="M26.5,-13.5C32.4,9.4,33.7,28.9,25,35.5C16.2,42.1,-2.7,36,-20,24.2C-37.2,12.4,-52.8,-4.9,-49.2,-24.7C-45.6,-44.5,-22.8,-66.8,-6.2,-64.8C10.3,-62.8,20.7,-36.4,26.5,-13.5Z"
                                         transform="translate(100 100)"
                                     />
@@ -52,22 +54,23 @@ const PokeCard = ({ poke }) => {
                             <div className="image">
                                 <img
                                     src={
-                                        poke.sprites.other["official-artwork"]
-                                            .front_default
+                                        poke.details.sprites.other[
+                                            "official-artwork"
+                                        ].front_default
                                     }
-                                    alt={poke.name}
+                                    alt={poke.details.name}
                                 ></img>
                             </div>
                         </div>
                     </ImageWrapper>
                     <InfoWrapper>
-                        <p className="poke-number">{`#${poke.id
+                        <p className="poke-number">{`#${poke.details.id
                             .toString()
                             .padStart(3, "0")}`}</p>
-                        <h2 className="poke-name">{poke.name}</h2>
+                        <h2 className="poke-name">{poke.details.name}</h2>
                         <h4>Tipos:</h4>
                         <ul className="poke-list">
-                            {poke.types.map((type, i) => {
+                            {poke.details.types.map((type, i) => {
                                 return (
                                     <li key={i}>
                                         <Chip
@@ -89,7 +92,7 @@ const PokeCard = ({ poke }) => {
                             <h4>Debilidad:</h4>
                             <h4>Habilidad:</h4>
                             <ul className="poke-list">
-                                {poke.abilities.map((ability, i) => {
+                                {poke.details.abilities.map((ability, i) => {
                                     return (
                                         <li key={i}>{ability.ability.name}</li>
                                     );
@@ -98,11 +101,24 @@ const PokeCard = ({ poke }) => {
                         </BackInfoLeft>
                         <BackInfoRight>
                             <h4>Altura:</h4>
-                            <p>{poke.height / 10} m</p>
+                            <p>{poke.details.height / 10} m</p>
                             <h4>Peso:</h4>
-                            <p>{poke.weight / 10} kg</p>
+                            <p>{poke.details.weight / 10} kg</p>
                             <h4>Sexo:</h4>
+                            {poke.gender ? (
+                                <div>
+                                    <GenderMale size="16" />
+                                    <GenderFemale size="16" />
+                                </div>
+                            ) : (
+                                "Indefinido"
+                            )}
                             <h4>Categoria:</h4>
+                            <p>
+                                {poke.category
+                                    .slice(0, poke.category.indexOf("Pokémon"))
+                                    .trim()}
+                            </p>
                         </BackInfoRight>
                     </BackInfo>
                     <BackSlider>

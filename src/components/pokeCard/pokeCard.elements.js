@@ -167,7 +167,7 @@ export const BackInfoLeft = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     width: 47.5%;
     height: 100%;
     background: #fff;
@@ -191,7 +191,7 @@ export const BackInfoRight = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     width: 47.5%;
     height: 100%;
     background: #fff;
@@ -203,7 +203,7 @@ export const BackSlider = styled.div`
     padding: 10px;
     width: 195px;
     height: 70px;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-bottom: 15px;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
