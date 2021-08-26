@@ -66,12 +66,12 @@ const PokeCard = ({ poke }) => {
                             .padStart(3, "0")}`}</p>
                         <h2 className="poke-name">{poke.name}</h2>
                         <h4>Tipos:</h4>
-                        <ul className="poke-info-type">
+                        <ul className="poke-list">
                             {poke.types.map((type, i) => {
                                 return (
                                     <li key={i}>
                                         <Chip
-                                            type={type.type.name}
+                                            name={type.type.name}
                                             colors={colorizer(type.type.name)}
                                         />
                                     </li>
@@ -88,10 +88,19 @@ const PokeCard = ({ poke }) => {
                         <BackInfoLeft>
                             <h4>Debilidad:</h4>
                             <h4>Habilidad:</h4>
+                            <ul className="poke-list">
+                                {poke.abilities.map((ability, i) => {
+                                    return (
+                                        <li key={i}>{ability.ability.name}</li>
+                                    );
+                                })}
+                            </ul>
                         </BackInfoLeft>
                         <BackInfoRight>
                             <h4>Altura:</h4>
+                            <p>{poke.height / 10} m</p>
                             <h4>Peso:</h4>
+                            <p>{poke.weight / 10} kg</p>
                             <h4>Sexo:</h4>
                             <h4>Categoria:</h4>
                         </BackInfoRight>

@@ -7,7 +7,6 @@ const Container = styled.div`
     position: relative;
     width: 100%;
     padding: 5px 8px 5px 8px;
-    /* background: grey; */
 
     & .chip-label {
         display: block;
@@ -40,7 +39,7 @@ const Container = styled.div`
     }
 `;
 
-const Chip = ({ type, colors }) => {
+const Chip = ({ name, colors }) => {
     const style = {
         top: { background: colors[0] },
         bottom: { background: colors[1] },
@@ -48,7 +47,7 @@ const Chip = ({ type, colors }) => {
 
     return (
         <Container>
-            <p className="chip-label">{type}</p>
+            <p className="chip-label">{name}</p>
             <span style={style.top} className="top"></span>
             <span style={style.bottom} className="bottom"></span>
         </Container>

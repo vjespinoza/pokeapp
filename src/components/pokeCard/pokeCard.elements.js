@@ -91,9 +91,8 @@ export const InfoWrapper = styled.section`
         margin-bottom: 10px;
     }
 
-    & ul.poke-info-type {
+    & ul.poke-list {
         display: flex;
-        font-size: 1rem;
         list-style: none;
         margin-top: 5px;
 
@@ -173,6 +172,19 @@ export const BackInfoLeft = styled.div`
     height: 100%;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+
+    & ul.poke-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        margin-top: 5px;
+
+        & li {
+            text-transform: capitalize;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+    }
 `;
 
 export const BackInfoRight = styled.div`
