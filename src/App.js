@@ -21,6 +21,7 @@ function App() {
         loginForm: false,
         signupForm: false,
     });
+    // Login bypass
     const [auth, setAuth] = useState({
         token: "QpwL5tke4Pnpja7X4",
         user: "eve.holt@reqres.in",

@@ -6,10 +6,17 @@ import {
     InfoWrapper,
     CardFront,
     CardBack,
+    BackInfo,
+    BackInfoLeft,
+    BackInfoRight,
+    BackSlider,
+    SliderLeft,
+    SliderRigth,
 } from "./pokeCard.elements";
 import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
+import { X } from "@styled-icons/bootstrap";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
@@ -19,14 +26,9 @@ const PokeCard = ({ poke }) => {
     };
 
     return (
-        <PokeCardContainer
-            id={`${poke.name}-${poke.id}`}
-            flipCard={flipCard}
-            onClick={handleFlipcard}
-            data-pokecard
-        >
+        <PokeCardContainer id={`${poke.name}-${poke.id}`}>
             <InnerWrapper flipCard={flipCard}>
-                <CardFront>
+                <CardFront flipCard={flipCard} onClick={handleFlipcard}>
                     <ImageWrapper>
                         <div className="overflow">
                             <div className="blob">
@@ -63,7 +65,7 @@ const PokeCard = ({ poke }) => {
                             .toString()
                             .padStart(3, "0")}`}</p>
                         <h2 className="poke-name">{poke.name}</h2>
-                        <h4>Type:</h4>
+                        <h4>Tipos:</h4>
                         <ul className="poke-info-type">
                             {poke.types.map((type, i) => {
                                 return (
@@ -78,8 +80,30 @@ const PokeCard = ({ poke }) => {
                         </ul>
                     </InfoWrapper>
                 </CardFront>
-                <CardBack>
-                    <img src={`./img/poke-logo.png`} alt={poke.name}></img>
+                <CardBack flipCard={flipCard}>
+                    <span onClick={handleFlipcard}>
+                        <X size="18" />
+                    </span>
+                    <BackInfo>
+                        <BackInfoLeft>
+                            <h4>Debilidad:</h4>
+                            <h4>Habilidad:</h4>
+                        </BackInfoLeft>
+                        <BackInfoRight>
+                            <h4>Altura:</h4>
+                            <h4>Peso:</h4>
+                            <h4>Sexo:</h4>
+                            <h4>Categoria:</h4>
+                        </BackInfoRight>
+                    </BackInfo>
+                    <BackSlider>
+                        <SliderLeft>
+                            <h4>Evolución:</h4>
+                        </SliderLeft>
+                        <SliderRigth>
+                            <img src="./img/poke-logo.png" alt="test" />
+                        </SliderRigth>
+                    </BackSlider>
                 </CardBack>
             </InnerWrapper>
         </PokeCardContainer>

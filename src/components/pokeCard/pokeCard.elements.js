@@ -5,7 +5,6 @@ export const PokeCardContainer = styled.article`
     background-color: #fff;
     width: 225px;
     height: 300px;
-    cursor: pointer;
     -webkit-perspective: 800px;
     perspective: 800px;
 `;
@@ -115,6 +114,8 @@ export const CardFront = styled.div`
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+    cursor: ${(props) => (props.flipCard ? "default" : "pointer")};
+    pointer-events: ${(props) => (props.flipCard ? "none" : "auto")};
 `;
 
 export const CardBack = styled.div`
@@ -125,7 +126,8 @@ export const CardBack = styled.div`
     top: 0;
     left: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -135,7 +137,82 @@ export const CardBack = styled.div`
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 
+    & span {
+        position: fixed;
+        top: -4px;
+        right: -4px;
+        background: #f94144;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        border-radius: 5000px;
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+
+        & svg {
+            pointer-events: none;
+            margin: 0 0 2px 1px;
+        }
+    }
+`;
+
+export const BackInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 195px;
+    height: 190px;
+    margin-top: 15px;
+`;
+
+export const BackInfoLeft = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    width: 47.5%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+`;
+
+export const BackInfoRight = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    width: 47.5%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+`;
+
+export const BackSlider = styled.div`
+    display: flex;
+    padding: 10px;
+    width: 195px;
+    height: 70px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+`;
+
+export const SliderLeft = styled.div`
+    display: flex;
+    width: 50%;
+    background: red;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+export const SliderRigth = styled.div`
+    display: flex;
+    width: 50%;
+    background: blue;
+    justify-content: center;
+    align-items: center;
+
     & img {
-        width: 50%;
+        height: 50%;
     }
 `;
