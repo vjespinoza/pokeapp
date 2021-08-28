@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { calculateWeakness } from "../utils/pokeWeakness";
 
 const usePokedex = () => {
     const [pokemon, setPokemon] = useState([]);
@@ -60,10 +61,15 @@ const usePokedex = () => {
                             }
                         });
 
+                        let types = res1.data.types.map((t) => {
+                            return t.type.name;
+                        });
+
                         setCurrentPokemon({
                             details: res1.data,
                             category: res2.data.genera[7].genus,
                             gender: gender,
+                            weakness: calculateWeakness(types),
                         });
                     })
                 )
