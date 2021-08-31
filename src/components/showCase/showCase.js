@@ -19,16 +19,16 @@ const ShowCase = () => {
         <ShowCaseContainer>
             <h1>Pokédex</h1>
             <PokedexGrid id="pokegrid">
-                {/* {pokeDetails
+                {pokeDetails
                     .sort((a, b) => a.details.id - b.details.id)
                     .map((poke, i) => {
                         return (
                             <PokeCard key={`${poke.name}-${i}`} poke={poke} />
                         );
-                    })} */}
-                {pokeDetails.map((poke, i) => {
+                    })}
+                {/* {pokeDetails.map((poke, i) => {
                     return <PokeCard key={`${poke.name}-${i}`} poke={poke} />;
-                })}
+                })} */}
                 {loading && <CardLoader />}
             </PokedexGrid>
         </ShowCaseContainer>

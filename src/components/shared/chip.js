@@ -11,9 +11,11 @@ const Container = styled.div`
     & .chip-label {
         display: block;
         color: #fff;
+        font-size: 0.8rem;
         text-transform: capitalize;
         text-align: center;
         width: 100%;
+        z-index: 1;
     }
 
     & .top {
@@ -24,7 +26,6 @@ const Container = styled.div`
         height: 12px;
         border-top-right-radius: 3px;
         border-top-left-radius: 3px;
-        z-index: -1;
     }
 
     & .bottom {
@@ -35,7 +36,6 @@ const Container = styled.div`
         height: 12px;
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px;
-        z-index: -1;
     }
 `;
 

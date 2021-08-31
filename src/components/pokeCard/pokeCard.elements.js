@@ -97,7 +97,6 @@ export const InfoWrapper = styled.section`
         margin-top: 5px;
 
         & li {
-            font-size: 0.8rem;
             margin-right: 10px;
         }
     }
@@ -136,7 +135,7 @@ export const CardBack = styled.div`
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 
-    & span {
+    & .closeCard {
         position: fixed;
         top: -4px;
         right: -4px;

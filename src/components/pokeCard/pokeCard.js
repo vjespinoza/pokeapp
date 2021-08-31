@@ -86,14 +86,20 @@ const PokeCard = ({ poke }) => {
                     </InfoWrapper>
                 </CardFront>
                 <CardBack flipCard={flipCard}>
-                    <span onClick={handleFlipcard}>
+                    <span className="closeCard" onClick={handleFlipcard}>
                         <X size="18" />
                     </span>
                     <BackInfo>
                         <BackInfoLeft>
                             <h4>Debilidad:</h4>
                             {weakness.map((w, i) => {
-                                return <p key={i}>{w.name}</p>;
+                                return (
+                                    <Chip
+                                        key={i}
+                                        name={w.name}
+                                        colors={colorizer(w.name)}
+                                    />
+                                );
                             })}
                             <h4>Habilidad:</h4>
                             <ul className="poke-list">
