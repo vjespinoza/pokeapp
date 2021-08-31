@@ -17,6 +17,7 @@ import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
 import { X, GenderMale, GenderFemale } from "@styled-icons/bootstrap";
+import useCalcWeakness from "../../hooks/useCalcWeakness";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
@@ -25,7 +26,8 @@ const PokeCard = ({ poke }) => {
         setFlipCard((flipCard) => !flipCard);
     };
 
-    // console.log(poke);
+    const { weakness } = useCalcWeakness(poke.details.types);
+    // console.log(weakness);
 
     return (
         <PokeCardContainer id={poke.details.name}>
@@ -90,6 +92,9 @@ const PokeCard = ({ poke }) => {
                     <BackInfo>
                         <BackInfoLeft>
                             <h4>Debilidad:</h4>
+                            {weakness.map((w, i) => {
+                                return <p key={i}>{w.name}</p>;
+                            })}
                             <h4>Habilidad:</h4>
                             <ul className="poke-list">
                                 {poke.details.abilities.map((ability, i) => {
