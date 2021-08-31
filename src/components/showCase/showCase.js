@@ -11,8 +11,6 @@ import useObserver from "../../hooks/useObserver";
 const ShowCase = () => {
     const { pokeDetails, gotoNextPage, loading, hasMore } = usePokedex();
 
-    // console.log(pokeDetails);
-
     useObserver({ pokeDetails, gotoNextPage, hasMore });
 
     return (
@@ -26,9 +24,6 @@ const ShowCase = () => {
                             <PokeCard key={`${poke.name}-${i}`} poke={poke} />
                         );
                     })}
-                {/* {pokeDetails.map((poke, i) => {
-                    return <PokeCard key={`${poke.name}-${i}`} poke={poke} />;
-                })} */}
                 {loading && <CardLoader />}
             </PokedexGrid>
         </ShowCaseContainer>
