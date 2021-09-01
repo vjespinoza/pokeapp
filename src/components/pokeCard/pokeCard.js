@@ -18,6 +18,7 @@ import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
 import { X, GenderMale, GenderFemale } from "@styled-icons/bootstrap";
 import useCalcWeakness from "../../hooks/useCalcWeakness";
+import useEvolutions from "../../hooks/useEvolutions";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
@@ -27,7 +28,8 @@ const PokeCard = ({ poke }) => {
     };
 
     const { weakness } = useCalcWeakness(poke.details.types);
-    // console.log(weakness);
+
+    const { evolutions } = useEvolutions(poke.details.species.url);
 
     return (
         <PokeCardContainer id={poke.details.name}>
