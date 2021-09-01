@@ -5,7 +5,7 @@ const Container = styled.div`
     padding: 5px 3px;
     border-radius: 3px;
     position: relative;
-    width: 100%;
+    max-width: 100%;
     padding: 5px 8px 5px 8px;
 
     & .chip-label {

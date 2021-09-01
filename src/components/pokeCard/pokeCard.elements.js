@@ -142,10 +142,14 @@ export const CardBack = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-areas:
+        "left right"
+        "bottom bottom";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 15px;
+    padding: 20px;
     width: 100%;
     height: 100%;
     background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
@@ -173,71 +177,82 @@ export const CardBack = styled.div`
     }
 `;
 
-export const BackInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 195px;
-    height: 190px;
-    margin-top: 15px;
-`;
-
 export const BackInfoLeft = styled.div`
+    grid-area: left;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
     border-radius: 3px;
-    width: 47.5%;
+    width: 100%;
     height: 100%;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+
+    & h4 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    & div.weakness-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
 
     & ul.poke-list {
         display: flex;
         flex-direction: column;
         list-style: none;
-        margin-top: 5px;
 
         & li {
             text-transform: capitalize;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-right: 10px;
         }
     }
 `;
 
 export const BackInfoRight = styled.div`
+    grid-area: right;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
     border-radius: 3px;
-    width: 47.5%;
+    width: 100%;
     height: 100%;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+
+    & h4 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    & p,
+    div {
+        margin-bottom: 20px;
+    }
 `;
 
 export const BackSlider = styled.div`
+    grid-area: bottom;
     display: flex;
-    padding: 10px;
-    width: 195px;
-    height: 70px;
+    flex-direction: column;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
     border-radius: 3px;
-    margin-bottom: 15px;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 `;
 
-export const SliderLeft = styled.div`
+export const Slider = styled.div`
     display: flex;
-    width: 50%;
-    background: red;
-    flex-direction: column;
-    justify-content: space-between;
-`;
-
-export const SliderRigth = styled.div`
-    display: flex;
-    width: 50%;
+    width: 100%;
+    height: 100%;
     background: blue;
     justify-content: center;
     align-items: center;

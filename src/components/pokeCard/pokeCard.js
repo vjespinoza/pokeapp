@@ -6,12 +6,10 @@ import {
     InfoWrapper,
     CardFront,
     CardBack,
-    BackInfo,
     BackInfoLeft,
     BackInfoRight,
     BackSlider,
-    SliderLeft,
-    SliderRigth,
+    Slider,
 } from "./pokeCard.elements";
 import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
@@ -95,9 +93,9 @@ const PokeCard = ({ poke }) => {
                     <span className="closeCard" onClick={handleFlipcard}>
                         <X size="18" />
                     </span>
-                    <BackInfo>
-                        <BackInfoLeft>
-                            <h4>Debilidad:</h4>
+                    <BackInfoLeft>
+                        <h4>Debilidades:</h4>
+                        <div className="weakness-list">
                             {weakness.map((w, i) => {
                                 return (
                                     <Chip
@@ -107,46 +105,43 @@ const PokeCard = ({ poke }) => {
                                     />
                                 );
                             })}
-                            <h4>Habilidad:</h4>
-                            <ul className="poke-list">
-                                {poke.details.abilities.map((ability, i) => {
-                                    return (
-                                        <li key={i}>{ability.ability.name}</li>
-                                    );
-                                })}
-                            </ul>
-                        </BackInfoLeft>
-                        <BackInfoRight>
-                            <h4>Altura:</h4>
-                            <p>{poke.details.height / 10} m</p>
-                            <h4>Peso:</h4>
-                            <p>{poke.details.weight / 10} kg</p>
-                            <h4>Sexo:</h4>
-                            {poke.gender ? (
-                                <div>
-                                    <GenderMale size="16" />
-                                    <GenderFemale size="16" />
-                                </div>
-                            ) : (
-                                "Indefinido"
-                            )}
-                            <h4>Categoria:</h4>
-                            <p>
-                                {poke.category
-                                    .slice(0, poke.category.indexOf("Pokémon"))
-                                    .trim()}
-                            </p>
-                        </BackInfoRight>
-                    </BackInfo>
+                        </div>
+                        <h4>Habilidades:</h4>
+                        <ul className="poke-list">
+                            {poke.details.abilities.map((ability, i) => {
+                                return <li key={i}>{ability.ability.name}</li>;
+                            })}
+                        </ul>
+                    </BackInfoLeft>
+                    <BackInfoRight>
+                        <h4>Dimensiones:</h4>
+                        <p>
+                            {poke.details.height / 10} m /{" "}
+                            {poke.details.weight / 10} kg
+                        </p>
+                        <h4>Sexo:</h4>
+                        {poke.gender ? (
+                            <div>
+                                <GenderMale size="16" />{" "}
+                                <GenderFemale size="16" />
+                            </div>
+                        ) : (
+                            "Indefinido"
+                        )}
+                        <h4>Categoria:</h4>
+                        <p>
+                            {poke.category
+                                .slice(0, poke.category.indexOf("Pokémon"))
+                                .trim()}
+                        </p>
+                    </BackInfoRight>
                     <BackSlider>
-                        <SliderLeft>
-                            <h4>Evolución:</h4>
-                        </SliderLeft>
-                        <SliderRigth>
+                        <h4>Evolución:</h4>
+                        <Slider>
                             {evolutions.map((e, i) => {
                                 return <img key={i} src={e} alt="test" />;
                             })}
-                        </SliderRigth>
+                        </Slider>
                     </BackSlider>
                 </CardBack>
             </InnerWrapper>
