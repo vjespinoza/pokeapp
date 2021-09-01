@@ -9,10 +9,10 @@ export const ShowCaseContainer = styled.main`
 
 export const PokedexGrid = styled.section`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));
     gap: 20px;
-    width: 90%;
-    max-width: 960px;
+    width: 100%;
+    max-width: 1325px;
     margin: 65px auto;
     justify-items: center;
 `;

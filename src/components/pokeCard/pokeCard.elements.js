@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const PokeCardContainer = styled.article`
     display: block;
     background-color: #fff;
-    width: 225px;
-    height: 300px;
+    width: calc(225px * 1.4);
+    height: calc(300px * 1.4);
     -webkit-perspective: 800px;
     perspective: 800px;
 `;
@@ -30,7 +30,7 @@ export const ImageWrapper = styled.section`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 125px;
+    height: 225px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
@@ -50,8 +50,8 @@ export const ImageWrapper = styled.section`
 
         & svg {
             position: absolute;
-            top: -420px;
-            left: -290px;
+            top: -540px;
+            left: -390px;
             width: 350%;
         }
     }
@@ -74,21 +74,40 @@ export const ImageWrapper = styled.section`
 `;
 
 export const InfoWrapper = styled.section`
-    display: block;
+    display: grid;
+    grid-template-areas:
+        "name name"
+        "type number";
     position: absolute;
-    top: 125px;
+    top: 240px;
     left: 0px;
     width: 100%;
     padding: 30px 20px 20px 20px;
 
     & p.poke-number {
-        font-size: 0.8rem;
+        grid-area: number;
+        font-size: 2rem;
+        align-self: center;
+        justify-self: center;
     }
 
     & h2.poke-name {
+        grid-area: name;
+        text-align: center;
         text-transform: capitalize;
-        font-size: 1.6rem;
-        margin-bottom: 10px;
+        font-size: 2.6rem;
+        margin-bottom: 20px;
+    }
+
+    & div.type-wrapper {
+        grid-area: type;
+        padding-left: 15px;
+    }
+
+    & h4.poke-types {
+        grid-area: name;
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 
     & ul.poke-list {

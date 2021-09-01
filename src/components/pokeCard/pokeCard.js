@@ -72,19 +72,23 @@ const PokeCard = ({ poke }) => {
                             .toString()
                             .padStart(3, "0")}`}</p>
                         <h2 className="poke-name">{poke.details.name}</h2>
-                        <h4>Tipos:</h4>
-                        <ul className="poke-list">
-                            {poke.details.types.map((type, i) => {
-                                return (
-                                    <li key={i}>
-                                        <Chip
-                                            name={type.type.name}
-                                            colors={colorizer(type.type.name)}
-                                        />
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                        <div className="type-wrapper">
+                            <h4 className="poke-types">Tipos:</h4>
+                            <ul className="poke-list">
+                                {poke.details.types.map((type, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Chip
+                                                name={type.type.name}
+                                                colors={colorizer(
+                                                    type.type.name
+                                                )}
+                                            />
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
                     </InfoWrapper>
                 </CardFront>
                 <CardBack flipCard={flipCard}>
@@ -139,7 +143,9 @@ const PokeCard = ({ poke }) => {
                             <h4>Evolución:</h4>
                         </SliderLeft>
                         <SliderRigth>
-                            <img src="./img/poke-logo.png" alt="test" />
+                            {evolutions.map((e, i) => {
+                                return <img key={i} src={e} alt="test" />;
+                            })}
                         </SliderRigth>
                     </BackSlider>
                 </CardBack>
