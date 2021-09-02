@@ -25,23 +25,6 @@ export const InnerWrapper = styled.div`
         props.flipCard ? "rotateY(180deg)" : "rotateY(0deg)"};
 `;
 
-export const Loader = styled.div`
-    display: ${(props) => (props.show ? "flex" : "none")};
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-    color: #ffffff;
-    content: "Cargando...";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    border-radius: 5px;
-`;
-
 export const ImageWrapper = styled.section`
     display: block;
     position: absolute;

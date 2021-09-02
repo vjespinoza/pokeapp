@@ -1,15 +1,11 @@
 import PokeCard from "./../pokeCard/pokeCard";
-import {
-    ShowCaseContainer,
-    PokedexGrid,
-    CardLoader,
-} from "./showCase.elements";
+import { ShowCaseContainer, PokedexGrid } from "./showCase.elements";
 //Custom hook
 import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
-    const { pokeDetails, gotoNextPage, loading, hasMore } = usePokedex();
+    const { pokeDetails, gotoNextPage, hasMore } = usePokedex();
 
     useObserver({ pokeDetails, gotoNextPage, hasMore });
 
@@ -24,7 +20,6 @@ const ShowCase = () => {
                             <PokeCard key={`${poke.name}-${i}`} poke={poke} />
                         );
                     })}
-                {loading && <CardLoader />}
             </PokedexGrid>
         </ShowCaseContainer>
     );
