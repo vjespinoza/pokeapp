@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../shared/button";
 
 export const PokeCardContainer = styled.article`
     display: block;
@@ -22,6 +23,23 @@ export const InnerWrapper = styled.div`
         props.flipCard ? "rotateY(180deg)" : "rotateY(0deg)"};
     transform: ${(props) =>
         props.flipCard ? "rotateY(180deg)" : "rotateY(0deg)"};
+`;
+
+export const Loader = styled.div`
+    display: ${(props) => (props.show ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #ffffff;
+    content: "Cargando...";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    border-radius: 5px;
 `;
 
 export const ImageWrapper = styled.section`
@@ -190,7 +208,7 @@ export const BackInfoLeft = styled.div`
 
     & h4 {
         margin-bottom: 10px;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 500;
     }
 
@@ -208,7 +226,7 @@ export const BackInfoLeft = styled.div`
 
         & li {
             text-transform: capitalize;
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-right: 10px;
         }
     }
@@ -227,37 +245,62 @@ export const BackInfoRight = styled.div`
 
     & h4 {
         margin-bottom: 10px;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 500;
     }
 
     & p,
     div {
         margin-bottom: 20px;
+        font-size: 1rem;
     }
 `;
 
 export const BackSlider = styled.div`
     grid-area: bottom;
     display: flex;
-    flex-direction: column;
     padding: 15px;
     width: 100%;
     height: 100%;
     border-radius: 3px;
     background: #fff;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+
+    & h4 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
 `;
 
 export const Slider = styled.div`
     display: flex;
     width: 100%;
     height: 100%;
-    background: blue;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 
     & img {
-        height: 50%;
+        display: block;
+        position: absolute;
+        top: -45px;
+        right: -10px;
+        height: 150px;
+        filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.6));
     }
+`;
+
+export const SliderControls = styled.div`
+    display: flex;
+    width: 100px;
+    height: fit-content;
+    justify-content: space-between;
+    transform: translate(-80px, 50px);
+`;
+
+export const SliderAction = styled(Button)`
+    visibility: ${(props) => (props.toggle ? "visible" : "hidden")};
+    border-radius: 1000px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
 `;

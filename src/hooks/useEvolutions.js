@@ -3,8 +3,10 @@ import axios from "axios";
 
 const useEvolutions = (data) => {
     const [evolutions, setEvolutions] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         axios
             .get(data)
             .then((res) => {
@@ -64,6 +66,7 @@ const useEvolutions = (data) => {
                                     `https://pokeapi.co/api/v2/pokemon/${r.name}`
                                 )
                                 .then((res) => {
+                                    setLoading(false);
                                     evols.push(
                                         res.data.sprites.other[
                                             "official-artwork"
@@ -87,7 +90,7 @@ const useEvolutions = (data) => {
             });
     }, [data]);
 
-    return { evolutions };
+    return { evolutions, loading };
 };
 
 export default useEvolutions;

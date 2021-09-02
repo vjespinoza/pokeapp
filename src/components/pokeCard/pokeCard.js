@@ -10,16 +10,26 @@ import {
     BackInfoRight,
     BackSlider,
     Slider,
+    SliderControls,
+    SliderAction,
+    Loader,
 } from "./pokeCard.elements";
 import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { colorizer } from "../../utils/colorizer";
-import { X, GenderMale, GenderFemale } from "@styled-icons/bootstrap";
+import {
+    X,
+    GenderMale,
+    GenderFemale,
+    ChevronLeft,
+    ChevronRight,
+} from "@styled-icons/bootstrap";
 import useCalcWeakness from "../../hooks/useCalcWeakness";
 import useEvolutions from "../../hooks/useEvolutions";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
+    const [counter, setCounter] = useState(0);
 
     const handleFlipcard = () => {
         setFlipCard((flipCard) => !flipCard);
@@ -27,12 +37,26 @@ const PokeCard = ({ poke }) => {
 
     const { weakness } = useCalcWeakness(poke.details.types);
 
-    const { evolutions } = useEvolutions(poke.details.species.url);
+    const { evolutions, loading } = useEvolutions(poke.details.species.url);
+
+    const handleSlider = (e) => {
+        let action = e.currentTarget.dataset.action;
+
+        if (action === "r") {
+            setCounter((counter) => counter + 1);
+        } else {
+            setCounter((counter) => counter - 1);
+        }
+    };
 
     return (
         <PokeCardContainer id={poke.details.name}>
             <InnerWrapper flipCard={flipCard}>
-                <CardFront flipCard={flipCard} onClick={handleFlipcard}>
+                <Loader show={loading}>Cargando...</Loader>
+                <CardFront
+                    flipCard={flipCard}
+                    onClick={loading ? null : handleFlipcard}
+                >
                     <ImageWrapper>
                         <div className="overflow">
                             <div className="blob">
@@ -138,9 +162,32 @@ const PokeCard = ({ poke }) => {
                     <BackSlider>
                         <h4>Evolución:</h4>
                         <Slider>
-                            {evolutions.map((e, i) => {
-                                return <img key={i} src={e} alt="test" />;
-                            })}
+                            <img
+                                src={evolutions[counter]}
+                                alt="pokemon evolution"
+                            />
+                            <SliderControls>
+                                <SliderAction
+                                    noMargin
+                                    data-action="l"
+                                    toggle={counter === 0 ? false : true}
+                                    onClick={(e) => handleSlider(e)}
+                                >
+                                    <ChevronLeft size="20" />
+                                </SliderAction>
+                                <SliderAction
+                                    noMargin
+                                    data-action="r"
+                                    toggle={
+                                        counter === evolutions.length - 1
+                                            ? false
+                                            : true
+                                    }
+                                    onClick={(e) => handleSlider(e)}
+                                >
+                                    <ChevronRight size="20" />
+                                </SliderAction>
+                            </SliderControls>
                         </Slider>
                     </BackSlider>
                 </CardBack>
