@@ -191,7 +191,7 @@ export const BackInfoLeft = styled.div`
 
     & h4 {
         margin-bottom: 10px;
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: 500;
     }
 
@@ -209,7 +209,7 @@ export const BackInfoLeft = styled.div`
 
         & li {
             text-transform: capitalize;
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-right: 10px;
         }
     }
@@ -228,14 +228,14 @@ export const BackInfoRight = styled.div`
 
     & h4 {
         margin-bottom: 10px;
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: 500;
     }
 
     & p,
     div {
         margin-bottom: 20px;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 `;
 
@@ -251,7 +251,7 @@ export const BackSlider = styled.div`
 
     & h4 {
         margin-bottom: 10px;
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: 500;
     }
 `;
@@ -277,13 +277,24 @@ export const SliderControls = styled.div`
     width: 100px;
     height: fit-content;
     justify-content: space-between;
-    transform: translate(-80px, 50px);
+    transform: translate(-70px, 50px);
 `;
 
 export const SliderAction = styled(Button)`
-    visibility: ${(props) => (props.toggle ? "visible" : "hidden")};
+    opacity: ${(props) => (props.toggle ? 1 : 0.5)};
+    pointer-events: ${(props) => (props.toggle ? "normal" : "none")};
     border-radius: 1000px;
     padding: 0;
     width: 35px;
     height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & svg.left {
+        margin-right: 2px;
+    }
+    & svg.right {
+        margin-left: 2px;
+    }
 `;

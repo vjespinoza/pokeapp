@@ -85,8 +85,11 @@ const useEvolutions = ({ data }) => {
                         setEvolutions(evols);
                         return evols;
                     })
-                    .then(() => {
-                        setLoading(false);
+                    .then((evols) => {
+                        evols &&
+                            setTimeout(() => {
+                                setLoading(false);
+                            }, 1000);
                     });
             });
     }, [data]);

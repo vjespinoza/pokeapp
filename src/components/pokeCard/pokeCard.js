@@ -195,7 +195,10 @@ const PokeCard = ({ poke }) => {
                                             }
                                             onClick={(e) => handleSlider(e)}
                                         >
-                                            <ChevronLeft size="20" />
+                                            <ChevronLeft
+                                                className="left"
+                                                size="20"
+                                            />
                                         </SliderAction>
                                         <SliderAction
                                             noMargin
@@ -208,7 +211,10 @@ const PokeCard = ({ poke }) => {
                                             }
                                             onClick={(e) => handleSlider(e)}
                                         >
-                                            <ChevronRight size="20" />
+                                            <ChevronRight
+                                                className="right"
+                                                size="20"
+                                            />
                                         </SliderAction>
                                     </SliderControls>
                                 </Slider>
