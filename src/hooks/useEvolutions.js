@@ -66,16 +66,17 @@ const useEvolutions = ({ data }) => {
                                     `https://pokeapi.co/api/v2/pokemon/${r.name}`
                                 )
                                 .then((res) => {
-                                    evols.push(
-                                        res.data.sprites.other[
+                                    evols.push(...evols, {
+                                        name: res.data.name,
+                                        url: res.data.sprites.other[
                                             "official-artwork"
-                                        ].front_default
-                                    );
+                                        ].front_default,
+                                    });
                                     evols.sort((a, b) => {
-                                        if (a < b) {
+                                        if (a.url < b.url) {
                                             return -1;
                                         }
-                                        if (a > b) {
+                                        if (a.url > b.url) {
                                             return 1;
                                         }
                                         return 0;

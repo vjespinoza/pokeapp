@@ -12,6 +12,7 @@ import {
     Slider,
     SliderControls,
     SliderAction,
+    NoEvolution,
 } from "./pokeCard.elements";
 import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
@@ -50,6 +51,23 @@ const PokeCard = ({ poke }) => {
             setCounter((counter) => counter - 1);
         }
     };
+
+    const handleFilterEvols = () => {
+        const filter = evolutions.filter((x) => {
+            return x.name !== poke.details.name;
+        });
+        const reduce =
+            filter.length > 0 &&
+            filter.reduce((prev, current) => {
+                if (prev.indexOf(current) === -1) {
+                    prev.push(current);
+                }
+                return prev;
+            }, []);
+        return reduce;
+    };
+
+    const filterEvols = handleFilterEvols();
 
     return (
         <PokeCardContainer id={poke.details.name}>
@@ -182,16 +200,33 @@ const PokeCard = ({ poke }) => {
                             <BackSlider>
                                 <h4>Evolución:</h4>
                                 <Slider>
-                                    <img
-                                        src={evolutions[counter]}
-                                        alt="pokemon evolution"
-                                    />
+                                    {filterEvols.length >= 1 ? (
+                                        <img
+                                            src={filterEvols[counter].url}
+                                            alt={filterEvols[counter].name}
+                                        />
+                                    ) : (
+                                        <NoEvolution>
+                                            <p>Este Pokémon no evoluciona</p>
+                                            <img
+                                                src={
+                                                    poke.details.sprites.other[
+                                                        "official-artwork"
+                                                    ].front_default
+                                                }
+                                                alt={poke.details.name}
+                                            />
+                                        </NoEvolution>
+                                    )}
                                     <SliderControls>
                                         <SliderAction
                                             noMargin
                                             data-action="l"
                                             toggle={
-                                                counter === 0 ? false : true
+                                                evolutions.length === 1 ||
+                                                counter === 0
+                                                    ? false
+                                                    : true
                                             }
                                             onClick={(e) => handleSlider(e)}
                                         >
@@ -204,8 +239,9 @@ const PokeCard = ({ poke }) => {
                                             noMargin
                                             data-action="r"
                                             toggle={
+                                                evolutions.length === 1 ||
                                                 counter ===
-                                                evolutions.length - 1
+                                                    filterEvols.length - 1
                                                     ? false
                                                     : true
                                             }

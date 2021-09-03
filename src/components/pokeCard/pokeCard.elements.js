@@ -298,3 +298,25 @@ export const SliderAction = styled(Button)`
         margin-left: 2px;
     }
 `;
+
+export const NoEvolution = styled.div`
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 100%;
+    /* background: green; */
+
+    & img {
+        height: 150px;
+        filter: opacity(0.2) brightness(0.1);
+    }
+
+    & p {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: red;
+        align-self: center;
+    }
+`;
