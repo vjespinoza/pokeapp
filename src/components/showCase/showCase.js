@@ -5,21 +5,28 @@ import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
-    const { pokeDetails, gotoNextPage, hasMore } = usePokedex();
+    const { pokemons, gotoNextPage, hasMore } = usePokedex();
 
-    useObserver({ pokeDetails, gotoNextPage, hasMore });
+    // useObserver({ pokemons, gotoNextPage, hasMore });
 
     return (
         <ShowCaseContainer>
             <h1>Pokédex</h1>
             <PokedexGrid id="pokegrid">
-                {pokeDetails
+                {pokemons.map((pokemon) => {
+                    return (
+                        <div key={pokemon.name}>
+                            <span>{pokemon.name}</span>
+                        </div>
+                    );
+                })}
+                {/* {pokemons
                     .sort((a, b) => a.details.id - b.details.id)
                     .map((poke, i) => {
                         return (
                             <PokeCard key={`${poke.name}-${i}`} poke={poke} />
                         );
-                    })}
+                    })} */}
             </PokedexGrid>
         </ShowCaseContainer>
     );

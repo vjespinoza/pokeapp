@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
+const useObserver = ({ pokemons, gotoNextPage, hasMore }) => {
     const [cardsContainer, setCardsContainer] = useState();
 
     useEffect(() => {
         setCardsContainer(document.getElementById("pokegrid"));
-    }, [pokeDetails]);
+    }, [pokemons]);
 
     const setObserver = () => {
         const options = {
@@ -18,14 +18,14 @@ const useObserver = ({ pokeDetails, gotoNextPage, hasMore }) => {
                 }
             });
         }, options);
-        if (cardsContainer && pokeDetails.length % 20 === 0) {
+        if (cardsContainer && pokemons.length % 20 === 0) {
             observer.observe(cardsContainer.lastElementChild);
         }
     };
 
     useEffect(() => {
         setObserver();
-    }, [pokeDetails]);
+    }, [pokemons]);
 
     return { setObserver };
 };
