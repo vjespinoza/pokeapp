@@ -10,7 +10,6 @@ import { InputGroup } from "../../../shared/inputGroup";
 //Import custom hook and util functions
 import useLogin from "../../../../hooks/useLogin";
 import useFormValidate from "../../../../hooks/useFormValidate";
-import useFetchApi from "../../../../hooks/useFetchApi";
 
 export const FormLogin = ({
     isActive,
@@ -22,23 +21,15 @@ export const FormLogin = ({
     auth,
     setAuth,
 }) => {
-    const { data, setData, handleChange, handleSubmnit, handleClick } =
-        useFormValidate({
-            isValidated,
-            setIsValidated,
-        });
-
-    const { fetchData, fetchError, postRequest } = useFetchApi({
-        url: "https://reqres.in/api/login",
+    const { data, handleChange, handleSubmnit, handleClick } = useFormValidate({
+        isValidated,
+        setIsValidated,
     });
 
     useLogin({
         data,
-        setData,
         isValidated,
-        fetchData,
-        fetchError,
-        postRequest,
+        setIsValidated,
         auth,
         setAuth,
     });

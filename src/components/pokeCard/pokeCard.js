@@ -25,8 +25,6 @@ import {
     ChevronLeft,
     ChevronRight,
 } from "@styled-icons/bootstrap";
-import useCalcWeakness from "../../hooks/useCalcWeakness";
-import useEvolutions from "../../hooks/useEvolutions";
 
 const PokeCard = ({ poke }) => {
     const [flipCard, setFlipCard] = useState(false);
@@ -35,12 +33,6 @@ const PokeCard = ({ poke }) => {
     const handleFlipcard = () => {
         setFlipCard((flipCard) => !flipCard);
     };
-
-    const { weakness } = useCalcWeakness(poke.details.types);
-
-    const { evolutions, loading } = useEvolutions({
-        data: poke.details.species.url,
-    });
 
     const handleSlider = (e) => {
         let action = e.currentTarget.dataset.action;
@@ -52,26 +44,10 @@ const PokeCard = ({ poke }) => {
         }
     };
 
-    const handleFilterEvols = () => {
-        const filter = evolutions.filter((x) => {
-            return x.name !== poke.details.name;
-        });
-        const reduce =
-            filter.length > 0 &&
-            filter.reduce((prev, current) => {
-                if (prev.indexOf(current) === -1) {
-                    prev.push(current);
-                }
-                return prev;
-            }, []);
-        return reduce;
-    };
-
-    const filterEvols = handleFilterEvols();
-
     return (
         <PokeCardContainer id={poke.details.name}>
-            {loading ? (
+            <p>Card</p>
+            {/* {loading ? (
                 <Loader />
             ) : (
                 <>
@@ -258,7 +234,7 @@ const PokeCard = ({ poke }) => {
                         </CardBack>
                     </InnerWrapper>
                 </>
-            )}
+            )} */}
         </PokeCardContainer>
     );
 };
