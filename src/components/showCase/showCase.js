@@ -5,7 +5,8 @@ import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
-    const { pokemons, gotoNextPage, hasMore } = usePokedex();
+    const { pokemons, gotoNextPage, hasMore, loading } = usePokedex();
+    // console.log(pokemons);
 
     // useObserver({ pokemons, gotoNextPage, hasMore });
 
@@ -13,20 +14,16 @@ const ShowCase = () => {
         <ShowCaseContainer>
             <h1>Pokédex</h1>
             <PokedexGrid id="pokegrid">
-                {pokemons.map((pokemon) => {
+                {/* {pokemons.map((pokemon, i) => {
                     return (
-                        <div key={pokemon.name}>
-                            <span>{pokemon.name}</span>
-                        </div>
-                    );
-                })}
-                {/* {pokemons
-                    .sort((a, b) => a.details.id - b.details.id)
-                    .map((poke, i) => {
-                        return (
-                            <PokeCard key={`${poke.name}-${i}`} poke={poke} />
+                        <PokeCard
+                            key={`${pokemon.name}-${i}`}
+                            loading={loading}
+                            pokemon={pokemon}
+                        />
                         );
                     })} */}
+                <></>
             </PokedexGrid>
         </ShowCaseContainer>
     );

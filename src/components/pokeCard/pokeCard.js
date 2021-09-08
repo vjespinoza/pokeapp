@@ -26,7 +26,7 @@ import {
     ChevronRight,
 } from "@styled-icons/bootstrap";
 
-const PokeCard = ({ poke }) => {
+const PokeCard = ({ pokemon, loading }) => {
     const [flipCard, setFlipCard] = useState(false);
     const [counter, setCounter] = useState(0);
 
@@ -45,9 +45,8 @@ const PokeCard = ({ poke }) => {
     };
 
     return (
-        <PokeCardContainer id={poke.details.name}>
-            <p>Card</p>
-            {/* {loading ? (
+        <PokeCardContainer id={pokemon.name}>
+            {loading ? (
                 <Loader />
             ) : (
                 <>
@@ -65,13 +64,12 @@ const PokeCard = ({ poke }) => {
                                         >
                                             <SvgGradient
                                                 colors={colorizer(
-                                                    poke.details.types[0].type
-                                                        .name
+                                                    pokemon.types[0].type.name
                                                 )}
-                                                id={parseInt(poke.details.id)}
+                                                id={parseInt(pokemon.id)}
                                             />
                                             <path
-                                                fill={`url(#grad${poke.details.id})`}
+                                                fill={`url(#grad${pokemon.id})`}
                                                 d="M26.5,-13.5C32.4,9.4,33.7,28.9,25,35.5C16.2,42.1,-2.7,36,-20,24.2C-37.2,12.4,-52.8,-4.9,-49.2,-24.7C-45.6,-44.5,-22.8,-66.8,-6.2,-64.8C10.3,-62.8,20.7,-36.4,26.5,-13.5Z"
                                                 transform="translate(100 100)"
                                             />
@@ -79,27 +77,21 @@ const PokeCard = ({ poke }) => {
                                     </div>
                                     <div className="image">
                                         <img
-                                            src={
-                                                poke.details.sprites.other[
-                                                    "official-artwork"
-                                                ].front_default
-                                            }
-                                            alt={poke.details.name}
+                                            src={pokemon.image}
+                                            alt={pokemon.name}
                                         ></img>
                                     </div>
                                 </div>
                             </ImageWrapper>
                             <InfoWrapper>
-                                <p className="poke-number">{`#${poke.details.id
+                                <p className="poke-number">{`#${pokemon.id
                                     .toString()
                                     .padStart(3, "0")}`}</p>
-                                <h2 className="poke-name">
-                                    {poke.details.name}
-                                </h2>
+                                <h2 className="poke-name">{pokemon.name}</h2>
                                 <div className="type-wrapper">
                                     <h4 className="poke-types">Tipos:</h4>
                                     <ul className="poke-list">
-                                        {poke.details.types.map((type, i) => {
+                                        {pokemon.types.map((type, i) => {
                                             return (
                                                 <li key={i}>
                                                     <Chip
@@ -125,7 +117,8 @@ const PokeCard = ({ poke }) => {
                             <BackInfoLeft>
                                 <h4>Debilidades:</h4>
                                 <div className="weakness-list">
-                                    {weakness.map((w, i) => {
+                                    {pokemon.weakness}
+                                    {/* {weakness.map((w, i) => {
                                         return (
                                             <Chip
                                                 key={i}
@@ -133,50 +126,51 @@ const PokeCard = ({ poke }) => {
                                                 colors={colorizer(w.name)}
                                             />
                                         );
-                                    })}
+                                    })} */}
                                 </div>
                                 <h4>Habilidades:</h4>
                                 <ul className="poke-list">
-                                    {poke.details.abilities.map(
-                                        (ability, i) => {
-                                            return (
-                                                <li key={i}>
-                                                    {ability.ability.name}
-                                                </li>
-                                            );
-                                        }
-                                    )}
+                                    {pokemon.abilities.map((ability, i) => {
+                                        return (
+                                            <li key={i}>
+                                                {ability.ability.name}
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </BackInfoLeft>
                             <BackInfoRight>
                                 <h4>Dimensiones:</h4>
                                 <p>
-                                    {poke.details.height / 10} m /{" "}
-                                    {poke.details.weight / 10} kg
+                                    {pokemon.height / 10} m /{" "}
+                                    {pokemon.weight / 10} kg
                                 </p>
                                 <h4>Sexo:</h4>
-                                {poke.gender ? (
+                                {pokemon.gender}
+                                {/* {poke.gender ? (
                                     <div>
                                         <GenderMale size="16" />{" "}
                                         <GenderFemale size="16" />
                                     </div>
                                 ) : (
                                     "Indefinido"
-                                )}
+                                )} */}
                                 <h4>Categoria:</h4>
                                 <p>
-                                    {poke.category
+                                    {pokemon.category}
+                                    {/* {poke.category
                                         .slice(
                                             0,
                                             poke.category.indexOf("Pokémon")
                                         )
-                                        .trim()}
+                                        .trim()} */}
                                 </p>
                             </BackInfoRight>
                             <BackSlider>
                                 <h4>Evolución:</h4>
                                 <Slider>
-                                    {filterEvols.length >= 1 ? (
+                                    {pokemon.evolutions}
+                                    {/* {filterEvols.length >= 1 ? (
                                         <img
                                             src={filterEvols[counter].url}
                                             alt={filterEvols[counter].name}
@@ -228,13 +222,13 @@ const PokeCard = ({ poke }) => {
                                                 size="20"
                                             />
                                         </SliderAction>
-                                    </SliderControls>
+                                    </SliderControls> */}
                                 </Slider>
                             </BackSlider>
                         </CardBack>
                     </InnerWrapper>
                 </>
-            )} */}
+            )}
         </PokeCardContainer>
     );
 };

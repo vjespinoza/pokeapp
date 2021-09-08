@@ -4,7 +4,6 @@ import axios from "axios";
 import { createCurrentPokemon } from "../utils/createCurrentPokemon";
 
 const usePokedex = () => {
-    const [currentPokemon, setCurrentPokemon] = useState({});
     const [pokemons, setPokemons] = useState([]);
     const [currentPageUrl, setCurrentPageUrl] = useState(
         "https://pokeapi.co/api/v2/pokemon"
@@ -27,10 +26,25 @@ const usePokedex = () => {
                 let baseData = res.data.results;
                 return baseData;
             })
-            .then((baseData) => {
-                let poke = createCurrentPokemon(baseData);
-                console.log(poke);
-                // console.log(poke[0]);
+            .then(async (baseData) => {
+                let results = [];
+                let reqMap = baseData.map(async (d) => {
+                    let reqs = axios.get(d.url).then((res) => {
+                        let obj = createCurrentPokemon(res.data);
+                        return obj;
+                    });
+                    return reqs;
+                });
+
+                await Promise.all(reqMap).then((res) => {
+                    results = res;
+                });
+                console.log(results);
+                setPokemons(results);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
             });
     }, [currentPageUrl]);
 
@@ -38,6 +52,7 @@ const usePokedex = () => {
         pokemons,
         gotoNextPage,
         hasMore,
+        loading,
     };
 };
 
