@@ -18,6 +18,7 @@ import SvgGradient from "./svgGradient";
 import Chip from "../shared/chip";
 import { Loader } from "../shared/loader";
 import { colorizer } from "../../utils/colorizer";
+import { filterEvols } from "../../utils/filterEvols";
 import {
     X,
     GenderMale,
@@ -171,22 +172,42 @@ const PokeCard = ({ pokemon, loading }) => {
                             <BackSlider>
                                 <h4>Evolución:</h4>
                                 <Slider>
-                                    {pokemon.evolutions}
-                                    {/* {filterEvols.length >= 1 ? (
+                                    {/* {pokemon.evolutions &&
+                                        filterEvols(
+                                            pokemon.evolutions,
+                                            pokemon.name
+                                        )[0].name} */}
+
+                                    {pokemon.evolutions &&
+                                    filterEvols(
+                                        pokemon.evolutions,
+                                        pokemon.name
+                                    ).length >= 1 ? (
                                         <img
-                                            src={filterEvols[counter].url}
-                                            alt={filterEvols[counter].name}
+                                            src={
+                                                pokemon.evolutions &&
+                                                filterEvols(
+                                                    pokemon.evolutions,
+                                                    pokemon.name
+                                                )[counter].url
+                                            }
+                                            alt={
+                                                pokemon.evolutions &&
+                                                filterEvols(
+                                                    pokemon.evolutions,
+                                                    pokemon.name
+                                                )[counter].name
+                                            }
                                         />
                                     ) : (
                                         <NoEvolution>
-                                            <p>Este Pokémon no evoluciona</p>
+                                            <p>
+                                                <span>{pokemon.name}</span> no
+                                                evoluciona
+                                            </p>
                                             <img
-                                                src={
-                                                    poke.details.sprites.other[
-                                                        "official-artwork"
-                                                    ].front_default
-                                                }
-                                                alt={poke.details.name}
+                                                src={pokemon.image}
+                                                alt={pokemon.name}
                                             />
                                         </NoEvolution>
                                     )}
@@ -195,10 +216,7 @@ const PokeCard = ({ pokemon, loading }) => {
                                             noMargin
                                             data-action="l"
                                             toggle={
-                                                evolutions.length === 1 ||
-                                                counter === 0
-                                                    ? false
-                                                    : true
+                                                counter === 0 ? false : true
                                             }
                                             onClick={(e) => handleSlider(e)}
                                         >
@@ -211,9 +229,8 @@ const PokeCard = ({ pokemon, loading }) => {
                                             noMargin
                                             data-action="r"
                                             toggle={
-                                                evolutions.length === 1 ||
                                                 counter ===
-                                                    filterEvols.length - 1
+                                                filterEvols.length - 1
                                                     ? false
                                                     : true
                                             }
@@ -224,7 +241,7 @@ const PokeCard = ({ pokemon, loading }) => {
                                                 size="20"
                                             />
                                         </SliderAction>
-                                    </SliderControls> */}
+                                    </SliderControls>
                                 </Slider>
                             </BackSlider>
                         </CardBack>
