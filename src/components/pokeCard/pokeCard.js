@@ -157,13 +157,15 @@ const PokeCard = ({ pokemon, loading }) => {
                                 )} */}
                                 <h4>Categoria:</h4>
                                 <p>
-                                    {pokemon.category}
-                                    {/* {poke.category
-                                        .slice(
-                                            0,
-                                            poke.category.indexOf("Pokémon")
-                                        )
-                                        .trim()} */}
+                                    {pokemon.category &&
+                                        pokemon.category
+                                            .slice(
+                                                0,
+                                                pokemon.category.indexOf(
+                                                    "Pokémon"
+                                                )
+                                            )
+                                            .trim()}
                                 </p>
                             </BackInfoRight>
                             <BackSlider>

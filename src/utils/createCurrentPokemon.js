@@ -5,6 +5,7 @@ export const createCurrentPokemon = (object) => {
 
     class Pokemon {
         constructor(obj) {
+            this.getCategory().then((res) => (this.category = res));
             this.abilities = obj.abilities;
             this.height = obj.height;
             this.id = obj.id;
@@ -12,20 +13,15 @@ export const createCurrentPokemon = (object) => {
             this.types = obj.types;
             this.image = obj.sprites.other["official-artwork"].front_default;
             this.weight = obj.weight;
-            this.category = this.getCategory(); // func pokemon/species/url (genera/genus)
+            this.category = undefined;
             this.evolutions = this.getEvolutions(); //func pokemon/species/url (evolution_chain/url)
             this.gender = this.getGender(); //func
             this.weakness = this.getWeakness(); //func
         }
 
         async getCategory() {
-            // let result = "";
-            // let category = axios
-            //     .get(object.species.url)
-            //     .then((res) => res.data.genera[7].genus);
-            // await Promise.resolve(category).then((res) => (result = res));
-            // return result;
-            return "category";
+            let response = await axios.get(obj.species.url);
+            return response.data.genera[7].genus;
         }
 
         getEvolutions() {

@@ -39,7 +39,6 @@ const usePokedex = () => {
                 await Promise.all(reqMap).then((res) => {
                     results = res;
                 });
-                console.log(results);
                 setPokemons(results);
                 setLoading(false);
             })
