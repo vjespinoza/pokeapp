@@ -172,28 +172,26 @@ const PokeCard = ({ pokemon, loading }) => {
                             <BackSlider>
                                 <h4>Evolución:</h4>
                                 <Slider>
-                                    {/* {pokemon.evolutions &&
+                                    {pokemon.evolutions &&
                                         filterEvols(
                                             pokemon.evolutions,
                                             pokemon.name
-                                        )[0].name} */}
+                                        )[0].name}
 
-                                    {pokemon.evolutions &&
+                                    {/* {
                                     filterEvols(
                                         pokemon.evolutions,
                                         pokemon.name
                                     ).length >= 1 ? (
                                         <img
                                             src={
-                                                pokemon.evolutions &&
-                                                filterEvols(
+                                                    filterEvols(
                                                     pokemon.evolutions,
                                                     pokemon.name
                                                 )[counter].url
                                             }
                                             alt={
-                                                pokemon.evolutions &&
-                                                filterEvols(
+                                                    filterEvols(
                                                     pokemon.evolutions,
                                                     pokemon.name
                                                 )[counter].name
@@ -241,7 +239,7 @@ const PokeCard = ({ pokemon, loading }) => {
                                                 size="20"
                                             />
                                         </SliderAction>
-                                    </SliderControls>
+                                    </SliderControls> */}
                                 </Slider>
                             </BackSlider>
                         </CardBack>

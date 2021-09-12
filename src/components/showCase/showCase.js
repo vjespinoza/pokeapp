@@ -7,7 +7,7 @@ import useObserver from "../../hooks/useObserver";
 const ShowCase = () => {
     const { pokemons, gotoNextPage, hasMore, loading } = usePokedex();
 
-    // useObserver({ pokemons, gotoNextPage, hasMore });
+    useObserver({ pokemons, gotoNextPage, hasMore });
 
     return (
         <ShowCaseContainer>

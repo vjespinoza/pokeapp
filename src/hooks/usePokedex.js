@@ -8,13 +8,9 @@ const usePokedex = () => {
     const [currentPageUrl, setCurrentPageUrl] = useState(
         "https://pokeapi.co/api/v2/pokemon"
     );
-    const [nextPageUrl, setNextPageUrl] = useState();
+    const [nextPageUrl, setNextPageUrl] = useState(undefined);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
-
-    const gotoNextPage = () => {
-        setCurrentPageUrl(nextPageUrl);
-    };
 
     useEffect(() => {
         setLoading(true);
@@ -22,6 +18,10 @@ const usePokedex = () => {
         axios
             .get(currentPageUrl)
             .then((res) => {
+                res && setNextPageUrl(res.data.next);
+                if (!res.data.next) {
+                    setHasMore(false);
+                }
                 //Array containing pokemon name and url from main endpoint (/pokemon)
                 let baseData = res.data.results;
                 return baseData;
@@ -39,14 +39,19 @@ const usePokedex = () => {
                 await Promise.all(reqMap).then((res) => {
                     results = res;
                 });
-                // console.log(results);
-                setPokemons(results);
+                console.log(results);
+                setPokemons([...pokemons, ...results]);
                 setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, [currentPageUrl]);
+
+    const gotoNextPage = () => {
+        console.log(nextPageUrl);
+        setCurrentPageUrl(nextPageUrl);
+    };
 
     return {
         pokemons,
