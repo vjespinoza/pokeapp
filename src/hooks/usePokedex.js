@@ -50,16 +50,23 @@ const usePokedex = () => {
             .then(async (pokes) => {
                 let result = pokes.map(async (poke) => {
                     let name = poke.name;
+                    let types = poke.types;
                     let pokeObj = poke;
 
                     await getCategory(name).then(
                         (res) => (pokeObj.category = res)
                     );
+
                     await getEvolutions(name).then(
                         (res) => (pokeObj.evolutions = res)
                     );
-                    // await getGender(name);
+
                     await getGender(name).then((res) => (pokeObj.gender = res));
+
+                    await getWeakness(types).then(
+                        (res) => (pokeObj.weakness = res)
+                    );
+
                     return pokeObj;
                 });
 

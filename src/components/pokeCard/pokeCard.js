@@ -118,8 +118,7 @@ const PokeCard = ({ pokemon, loading }) => {
                             <BackInfoLeft>
                                 <h4>Debilidades:</h4>
                                 <div className="weakness-list">
-                                    {pokemon.weakness}
-                                    {/* {weakness.map((w, i) => {
+                                    {pokemon.weakness.map((w, i) => {
                                         return (
                                             <Chip
                                                 key={i}
@@ -127,7 +126,7 @@ const PokeCard = ({ pokemon, loading }) => {
                                                 colors={colorizer(w.name)}
                                             />
                                         );
-                                    })} */}
+                                    })}
                                 </div>
                                 <h4>Habilidades:</h4>
                                 <ul className="poke-list">

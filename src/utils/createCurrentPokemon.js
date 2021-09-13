@@ -126,8 +126,63 @@ export async function getGender(name) {
 }
 
 //Get pokemon weakness *************************************************
-export async function getWeakness() {
-    //types = array => pokemon/types
-    //fetch /type with types.name
-    return "weakness";
+
+export async function getWeakness(arr) {
+    class Damage {
+        constructor(name, value) {
+            this.name = name;
+            this.value = value;
+        }
+    }
+
+    let damageByType = { 0: [], 1: [] };
+
+    let reqMap = arr.map(async (t) => {
+        let reqs = axios
+            .get(`https://pokeapi.co/api/v2/type/${t.type.name}`)
+            .then((res) => res.data.damage_relations);
+        return reqs;
+    });
+
+    await Promise.all(reqMap).then((res) => {
+        res.forEach((damage, i) => {
+            damage.double_damage_from.forEach((d) => {
+                damageByType[i].push(new Damage(d.name, 2));
+            });
+
+            damage.half_damage_from.forEach((d) => {
+                damageByType[i].push(new Damage(d.name, 0.5));
+            });
+
+            damage.no_damage_from.forEach((d) => {
+                damageByType[i].push(new Damage(d.name, 0));
+            });
+        });
+    });
+
+    const calculateWeakness = (obj) => {
+        let { 0: type_a, 1: type_b } = obj;
+
+        let commonTypes = [];
+        let uncommonTypes = [...type_a, ...type_b];
+        type_a.map((x) => {
+            type_b.map((y, i) => {
+                if (Object.values(x).includes(Object.values(y)[0])) {
+                    commonTypes.push({
+                        name: y.name,
+                        value: x.value * y.value,
+                    });
+                    uncommonTypes = uncommonTypes.filter((z) => {
+                        return z.name !== x.name;
+                    });
+                }
+            });
+        });
+        let weaks = [...commonTypes, ...uncommonTypes].filter((w) => {
+            return w.value >= 2;
+        });
+        return weaks;
+    };
+
+    return calculateWeakness(damageByType);
 }
