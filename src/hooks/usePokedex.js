@@ -5,6 +5,8 @@ import {
     createCurrentPokemon,
     getCategory,
     getEvolutions,
+    getGender,
+    getWeakness,
 } from "../utils/createCurrentPokemon";
 
 const usePokedex = () => {
@@ -56,6 +58,10 @@ const usePokedex = () => {
                     await getEvolutions(name).then(
                         (res) => (pokeObj.evolutions = res)
                     );
+                    await getGender(name);
+                    // await getEvolutions(name).then(
+                    //     (res) => (pokeObj.gender = res)
+                    // );
                     return pokeObj;
                 });
 

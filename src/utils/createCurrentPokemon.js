@@ -13,9 +13,9 @@ export const createCurrentPokemon = (object) => {
             this.image = obj.sprites.other["official-artwork"].front_default;
             this.weight = obj.weight;
             this.category = undefined;
-            this.evolutions = undefined; //func pokemon/species/url (evolution_chain/url)
-            this.gender = undefined; //func
-            this.weakness = undefined; //func
+            this.evolutions = undefined;
+            this.gender = undefined;
+            this.weakness = undefined;
         }
     }
 
@@ -91,13 +91,43 @@ export async function getEvolutions(name) {
 }
 
 //Get pokemon gender *************************************************
-export function getGender() {
-    //gender/3
-    return "gender";
+export async function getGender(name) {
+    let req1 = axios.get("https://pokeapi.co/api/v2/gender/1");
+    let req2 = axios.get("https://pokeapi.co/api/v2/gender/2");
+    let req3 = axios.get("https://pokeapi.co/api/v2/gender/3");
+
+    let gender = {};
+
+    let reqs = axios.all([req1, req2, req3]).then(
+        axios.spread(async (...responses) => {
+            let res1 = responses[0].data.pokemon_species_details;
+            let res2 = responses[1].data.pokemon_species_details;
+            let res3 = responses[2].data.pokemon_species_details;
+            console.log(res1);
+
+            gender.female = (await res1.some(
+                (n) => (n.pokemon_species.name = name)
+            ))
+                ? true
+                : false;
+            gender.male = (await res2.some(
+                (n) => (n.pokemon_species.name = name)
+            ))
+                ? true
+                : false;
+            gender.none = (await res3.some(
+                (n) => (n.pokemon_species.name = name)
+            ))
+                ? true
+                : false;
+        })
+    );
+
+    // console.log(gender);
 }
 
 //Get pokemon weakness *************************************************
-export function getWeakness() {
+export async function getWeakness() {
     //types = array => pokemon/types
     //fetch /type with types.name
     return "weakness";

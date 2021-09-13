@@ -44,7 +44,6 @@ const PokeCard = ({ pokemon, loading }) => {
             setCounter((counter) => counter - 1);
         }
     };
-    console.log(loading);
 
     return (
         <PokeCardContainer id={pokemon.name}>
