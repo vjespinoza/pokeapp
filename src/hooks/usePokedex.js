@@ -58,10 +58,8 @@ const usePokedex = () => {
                     await getEvolutions(name).then(
                         (res) => (pokeObj.evolutions = res)
                     );
-                    await getGender(name);
-                    // await getEvolutions(name).then(
-                    //     (res) => (pokeObj.gender = res)
-                    // );
+                    // await getGender(name);
+                    await getGender(name).then((res) => (pokeObj.gender = res));
                     return pokeObj;
                 });
 

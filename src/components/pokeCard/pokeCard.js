@@ -147,15 +147,15 @@ const PokeCard = ({ pokemon, loading }) => {
                                     {pokemon.weight / 10} kg
                                 </p>
                                 <h4>Sexo:</h4>
-                                {pokemon.gender}
-                                {/* {poke.gender ? (
-                                    <div>
-                                        <GenderMale size="16" />{" "}
+                                <div>
+                                    {pokemon.gender.female && (
                                         <GenderFemale size="16" />
-                                    </div>
-                                ) : (
-                                    "Indefinido"
-                                )} */}
+                                    )}
+                                    {pokemon.gender.male && (
+                                        <GenderMale size="16" />
+                                    )}
+                                    {pokemon.gender.none && <p>Indefinido</p>}
+                                </div>
                                 <h4>Categoria:</h4>
                                 <p>
                                     {pokemon.category &&

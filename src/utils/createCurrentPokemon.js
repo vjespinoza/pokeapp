@@ -99,31 +99,30 @@ export async function getGender(name) {
     let gender = {};
 
     let reqs = axios.all([req1, req2, req3]).then(
-        axios.spread(async (...responses) => {
+        axios.spread((...responses) => {
             let res1 = responses[0].data.pokemon_species_details;
             let res2 = responses[1].data.pokemon_species_details;
             let res3 = responses[2].data.pokemon_species_details;
-            console.log(res1);
 
-            gender.female = (await res1.some(
-                (n) => (n.pokemon_species.name = name)
-            ))
+            gender.female = res1.find((x) =>
+                x.pokemon_species.name.includes(name)
+            )
                 ? true
                 : false;
-            gender.male = (await res2.some(
-                (n) => (n.pokemon_species.name = name)
-            ))
+            gender.male = res2.find((x) =>
+                x.pokemon_species.name.includes(name)
+            )
                 ? true
                 : false;
-            gender.none = (await res3.some(
-                (n) => (n.pokemon_species.name = name)
-            ))
+            gender.none = res3.find((x) =>
+                x.pokemon_species.name.includes(name)
+            )
                 ? true
                 : false;
         })
     );
 
-    // console.log(gender);
+    return gender;
 }
 
 //Get pokemon weakness *************************************************
