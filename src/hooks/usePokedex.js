@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 //helpers
-import { createCurrentPokemon } from "../utils/createCurrentPokemon";
+import {
+    createCurrentPokemon,
+    getCategory,
+    getEvolutions,
+} from "../utils/createCurrentPokemon";
 
 const usePokedex = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -27,7 +31,7 @@ const usePokedex = () => {
                 return baseData;
             })
             .then(async (baseData) => {
-                let results = [];
+                let pokes = [];
                 let reqMap = baseData.map(async (d) => {
                     let reqs = axios.get(d.url).then((res) => {
                         let obj = createCurrentPokemon(res.data);
@@ -37,10 +41,28 @@ const usePokedex = () => {
                 });
 
                 await Promise.all(reqMap).then((res) => {
-                    results = res;
+                    res.forEach((r) => pokes.push(r));
                 });
-                console.log(results);
-                setPokemons([...pokemons, ...results]);
+                return pokes;
+            })
+            .then(async (pokes) => {
+                let result = pokes.map(async (poke) => {
+                    let name = poke.name;
+                    let pokeObj = poke;
+
+                    await getCategory(name).then(
+                        (res) => (pokeObj.category = res)
+                    );
+                    await getEvolutions(name).then(
+                        (res) => (pokeObj.evolutions = res)
+                    );
+                    return pokeObj;
+                });
+
+                await Promise.all(result).then((res) =>
+                    setPokemons([...pokemons, ...res])
+                );
+
                 setLoading(false);
             })
             .catch((error) => {
@@ -49,7 +71,6 @@ const usePokedex = () => {
     }, [currentPageUrl]);
 
     const gotoNextPage = () => {
-        console.log(nextPageUrl);
         setCurrentPageUrl(nextPageUrl);
     };
 

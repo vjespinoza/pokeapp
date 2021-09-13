@@ -1,5 +1,5 @@
 export const filterEvols = (evolutions, cardName) => {
-    const arr = evolutions[0]
+    const arr = evolutions
         .filter((e) => {
             return e.name !== cardName;
         })

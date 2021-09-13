@@ -44,6 +44,7 @@ const PokeCard = ({ pokemon, loading }) => {
             setCounter((counter) => counter - 1);
         }
     };
+    console.log(loading);
 
     return (
         <PokeCardContainer id={pokemon.name}>
@@ -172,26 +173,19 @@ const PokeCard = ({ pokemon, loading }) => {
                             <BackSlider>
                                 <h4>Evolución:</h4>
                                 <Slider>
-                                    {pokemon.evolutions &&
-                                        filterEvols(
-                                            pokemon.evolutions,
-                                            pokemon.name
-                                        )[0].name}
-
-                                    {/* {
-                                    filterEvols(
+                                    {filterEvols(
                                         pokemon.evolutions,
                                         pokemon.name
                                     ).length >= 1 ? (
                                         <img
                                             src={
-                                                    filterEvols(
+                                                filterEvols(
                                                     pokemon.evolutions,
                                                     pokemon.name
                                                 )[counter].url
                                             }
                                             alt={
-                                                    filterEvols(
+                                                filterEvols(
                                                     pokemon.evolutions,
                                                     pokemon.name
                                                 )[counter].name
@@ -239,7 +233,7 @@ const PokeCard = ({ pokemon, loading }) => {
                                                 size="20"
                                             />
                                         </SliderAction>
-                                    </SliderControls> */}
+                                    </SliderControls>
                                 </Slider>
                             </BackSlider>
                         </CardBack>
