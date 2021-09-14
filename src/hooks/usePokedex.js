@@ -16,8 +16,11 @@ const usePokedex = () => {
     );
     const [nextPageUrl, setNextPageUrl] = useState();
     const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
+
         axios
             .get(currentPageUrl)
             .then((res) => {
@@ -70,6 +73,7 @@ const usePokedex = () => {
                 await Promise.all(result).then((res) =>
                     setPokemons([...pokemons, ...res])
                 );
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -84,6 +88,7 @@ const usePokedex = () => {
         pokemons,
         gotoNextPage,
         hasMore,
+        loading,
     };
 };
 

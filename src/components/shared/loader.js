@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Loader = styled.div`
+export const LoaderCard = styled.div`
     display: block;
     width: calc(225px * 1.4);
     height: calc(300px * 1.4);
@@ -32,6 +32,31 @@ export const Loader = styled.div`
             100% {
                 left: 100%;
             }
+        }
+    }
+`;
+
+export const LoaderCircular = styled.div`
+    display: block;
+    margin: 50px auto;
+    width: 100px;
+    height: 100px;
+    background-image: url("../img/poke_ball.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    clip-path: circle(50% at 50% 50%);
+    animation: rotate 1s linear infinite;
+    opacity: 80%;
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0);
+        }
+        50% {
+            transform: rotate(360deg);
+        }
+        100% {
+            transform: rotate(0);
         }
     }
 `;
