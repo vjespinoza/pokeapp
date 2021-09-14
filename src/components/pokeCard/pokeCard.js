@@ -45,7 +45,7 @@ const PokeCard = ({ pokemon }) => {
     };
 
     return (
-        <PokeCardContainer id={pokemon.id}>
+        <PokeCardContainer id={pokemon.id} data-name="pokecard">
             <InnerWrapper flipCard={flipCard}>
                 <CardFront flipCard={flipCard} onClick={handleFlipcard}>
                     <ImageWrapper>

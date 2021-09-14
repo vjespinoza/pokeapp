@@ -38,7 +38,6 @@ export const LoaderCard = styled.div`
 
 export const LoaderCircular = styled.div`
     display: block;
-    margin: 50px auto;
     width: 100px;
     height: 100px;
     background-image: url("../img/poke_ball.png");
@@ -47,16 +46,21 @@ export const LoaderCircular = styled.div`
     clip-path: circle(50% at 50% 50%);
     animation: rotate 1s linear infinite;
     opacity: 80%;
+    position: absolute;
+    bottom: -125px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
 
     @keyframes rotate {
         0% {
-            transform: rotate(0);
+            transform: translateX(-50%) rotate(0);
         }
         50% {
-            transform: rotate(360deg);
+            transform: translateX(-50%) rotate(360deg);
         }
         100% {
-            transform: rotate(0);
+            transform: translateX(-50%) rotate(0);
         }
     }
 `;

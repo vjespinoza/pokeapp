@@ -1,37 +1,34 @@
 import { useState, useEffect } from "react";
 
-const useObserver = ({ pokemons, gotoNextPage, hasMore, loading }) => {
-    const [cardsContainer, setCardsContainer] = useState();
+const useObserver = ({ gotoNextPage, hasMore, loading }) => {
+    const [nodes, setNodes] = useState();
 
     useEffect(() => {
-        setCardsContainer(document.getElementById("pokegrid"));
-        // console.log(document.getElementById("pokegrid"));
+        !loading &&
+            setNodes(
+                Array.from(document.querySelectorAll("[data-name='pokecard']"))
+            );
     }, [loading]);
 
-    const setObserver = () => {
+    useEffect(() => {
         const options = {
             threshold: 1,
         };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.setAttribute("style", "background: red");
-                    console.log(entry.target);
+                    // entry.target.setAttribute("style", "background: red");
+                    //console.log(entry.target);
                     hasMore && gotoNextPage();
                 }
             });
         }, options);
-        if (cardsContainer && pokemons.length % 20 === 0) {
-            console.log(cardsContainer.lastElementChild);
-            observer.observe(cardsContainer.lastElementChild);
+        if (nodes) {
+            observer.observe(nodes[nodes.length - 1]);
         }
-    };
+    }, [nodes]);
 
-    useEffect(() => {
-        setObserver();
-    }, [pokemons]);
-
-    return { setObserver };
+    return true;
 };
 
 export default useObserver;

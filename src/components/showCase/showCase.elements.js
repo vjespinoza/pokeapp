@@ -15,4 +15,5 @@ export const PokedexGrid = styled.section`
     max-width: 1325px;
     margin: 65px auto;
     justify-items: center;
+    position: relative;
 `;
