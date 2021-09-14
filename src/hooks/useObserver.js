@@ -5,7 +5,7 @@ const useObserver = ({ pokemons, gotoNextPage, hasMore }) => {
 
     useEffect(() => {
         setCardsContainer(document.getElementById("pokegrid"));
-    }, [pokemons]);
+    }, []);
 
     const setObserver = () => {
         const options = {
@@ -14,6 +14,8 @@ const useObserver = ({ pokemons, gotoNextPage, hasMore }) => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                    entry.target.setAttribute("style", "background: red");
+                    console.log(entry.target);
                     hasMore && gotoNextPage();
                 }
             });

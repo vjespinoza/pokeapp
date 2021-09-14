@@ -5,9 +5,9 @@ import usePokedex from "../../hooks/usePokedex";
 import useObserver from "../../hooks/useObserver";
 
 const ShowCase = () => {
-    const { pokemons, gotoNextPage, hasMore, loading } = usePokedex();
+    const { pokemons, gotoNextPage, hasMore } = usePokedex();
 
-    // useObserver({ pokemons, gotoNextPage, hasMore });
+    useObserver({ pokemons, gotoNextPage, hasMore });
 
     return (
         <ShowCaseContainer>
@@ -17,8 +17,8 @@ const ShowCase = () => {
                     return (
                         <PokeCard
                             key={`${pokemon.name}-${i}`}
-                            loading={loading}
                             pokemon={pokemon}
+                            pokemons={pokemons}
                         />
                     );
                 })}

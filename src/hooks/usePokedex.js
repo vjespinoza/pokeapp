@@ -14,13 +14,10 @@ const usePokedex = () => {
     const [currentPageUrl, setCurrentPageUrl] = useState(
         "https://pokeapi.co/api/v2/pokemon"
     );
-    const [nextPageUrl, setNextPageUrl] = useState(undefined);
+    const [nextPageUrl, setNextPageUrl] = useState();
     const [hasMore, setHasMore] = useState(true);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-
         axios
             .get(currentPageUrl)
             .then((res) => {
@@ -73,8 +70,6 @@ const usePokedex = () => {
                 await Promise.all(result).then((res) =>
                     setPokemons([...pokemons, ...res])
                 );
-
-                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -89,7 +84,6 @@ const usePokedex = () => {
         pokemons,
         gotoNextPage,
         hasMore,
-        loading,
     };
 };
 

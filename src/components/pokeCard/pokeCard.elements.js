@@ -319,4 +319,8 @@ export const NoEvolution = styled.div`
         color: red;
         align-self: center;
     }
+
+    & p > span {
+        text-transform: capitalize;
+    }
 `;
