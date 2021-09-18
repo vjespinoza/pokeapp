@@ -12,7 +12,6 @@ const ShowCase = () => {
 
     return (
         <ShowCaseContainer>
-            <h1>Pokédex</h1>
             <PokedexGrid id="pokegrid">
                 {pokemons.map((pokemon, i) => {
                     return (
